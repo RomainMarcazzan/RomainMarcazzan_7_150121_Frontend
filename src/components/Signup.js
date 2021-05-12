@@ -25,7 +25,7 @@ const Signup = () => {
     axios
       .post("http://localhost:5000/api/auth/signup", data)
       .then((response) => {
-        console.log("signup envoyé");
+        console.log(response);
       });
   };
 

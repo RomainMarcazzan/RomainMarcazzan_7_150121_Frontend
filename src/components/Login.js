@@ -20,7 +20,8 @@ const Login = () => {
     axios
       .post("http://localhost:5000/api/auth/login", data)
       .then((response) => {
-        console.log("login envoyé");
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userId", response.data.userId);
       });
   };
 
