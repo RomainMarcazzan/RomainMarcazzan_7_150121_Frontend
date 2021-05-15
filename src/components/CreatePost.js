@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { PostContext } from "../context/PostContext";
 import "./Signup.css";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -6,8 +8,14 @@ import * as Yup from "yup";
 import { Button } from "@material-ui/core";
 
 const CreatePost = () => {
+  const [authState, setAuthState] = useContext(AuthContext);
+  const [postState, setPostState] = useContext(PostContext);
+
+  console.log(postState);
+  console.log(authState);
+
   const initialValues = {
-    userId: localStorage.getItem("userId"),
+    userId: authState.userId,
     title: "",
     imageUrl: "",
     isFlaged: false,
@@ -19,12 +27,15 @@ const CreatePost = () => {
   });
 
   const onSubmit = (data) => {
-    axios.post("http://localhost:5000/api/posts/", data, {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-        // "Content-type": "application/json",
-      },
-    });
+    axios
+      .post("http://localhost:5000/api/posts/", data, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+          // "Content-type": "application/json",
+        },
+      })
+      .then(() => setPostState(true))
+      .catch((error) => console.log(error));
   };
 
   return (

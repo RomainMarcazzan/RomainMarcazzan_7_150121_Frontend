@@ -1,14 +1,19 @@
-import React from "react";
-import Signup from "../components/Signup";
-import Login from "../components/Login";
+import React, { useContext } from "react";
 import CreatePost from "../components/CreatePost";
+import ListOfPosts from "../components/ListOfPosts";
+import { AuthContext } from "../context/AuthContext";
 
 const HomePage = () => {
+  const [authState, setAuthState] = useContext(AuthContext);
+
   return (
     <div>
-      <Signup />
-      <Login />
-      <CreatePost />
+      {authState.isLoggedIn && (
+        <>
+          <CreatePost />
+          <ListOfPosts />
+        </>
+      )}
     </div>
   );
 };

@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { useHistory } from "react-router-dom";
 import "./Signup.css";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -6,6 +8,9 @@ import * as Yup from "yup";
 import { Button } from "@material-ui/core";
 
 const Signup = () => {
+  const history = useHistory("/");
+  const [authState, setAuthState] = useContext(AuthContext);
+
   const initialValues = {
     email: "",
     password: "",
@@ -25,7 +30,20 @@ const Signup = () => {
     axios
       .post("http://localhost:5000/api/auth/signup", data)
       .then((response) => {
-        console.log(response);
+        localStorage.setItem("token", response.data.token);
+        if (response.data.error) {
+          setAuthState({ isLoggedIn: false });
+        } else {
+          setAuthState({
+            isLoggedIn: true,
+            email: response.data.email,
+            firstname: response.data.firstname,
+            lastname: response.data.lastname,
+            userId: response.data.userId,
+            avatar: response.data.avatar,
+          });
+          history.push("/");
+        }
       });
   };
 

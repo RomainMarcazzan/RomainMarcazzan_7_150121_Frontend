@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { useHistory } from "react-router-dom";
 import "./Login.css";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -6,6 +8,10 @@ import * as Yup from "yup";
 import { Button } from "@material-ui/core";
 
 const Login = () => {
+  const [authState, setAuthState] = useContext(AuthContext);
+
+  const history = useHistory();
+
   const initialValues = {
     email: "",
     password: "",
@@ -21,7 +27,19 @@ const Login = () => {
       .post("http://localhost:5000/api/auth/login", data)
       .then((response) => {
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("userId", response.data.userId);
+        if (response.data.error) {
+          setAuthState({ isLoggedIn: false });
+        } else {
+          setAuthState({
+            isLoggedIn: true,
+            email: response.data.email,
+            firstname: response.data.firstname,
+            lastname: response.data.lastname,
+            userId: response.data.userId,
+            avatar: response.data.avatar,
+          });
+          history.push("/");
+        }
       });
   };
 
