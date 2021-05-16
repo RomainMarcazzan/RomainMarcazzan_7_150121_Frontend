@@ -4,11 +4,11 @@ const AuthContext = createContext();
 const AuthProvider = (props) => {
   const [authState, setAuthState] = useState({
     isLoggedIn: false,
-    email: "",
-    firsname: "",
-    lastname: "",
-    avatar: "",
-    userId: "",
+    // email: "",
+    // firsname: "",
+    // lastname: "",
+    // avatar: "",
+    // userId: "",
   });
   return (
     <AuthContext.Provider value={[authState, setAuthState]}>

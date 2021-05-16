@@ -36,11 +36,12 @@ const Signup = () => {
         } else {
           setAuthState({
             isLoggedIn: true,
-            email: response.data.email,
-            firstname: response.data.firstname,
-            lastname: response.data.lastname,
-            userId: response.data.userId,
-            avatar: response.data.avatar,
+            user: response.data.user,
+            // email: response.data.email,
+            // firstname: response.data.firstname,
+            // lastname: response.data.lastname,
+            // userId: response.data.userId,
+            // avatar: response.data.avatar,
           });
           history.push("/");
         }

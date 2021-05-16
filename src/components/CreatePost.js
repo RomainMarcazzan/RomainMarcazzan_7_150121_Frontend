@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { PostContext } from "../context/PostContext";
 import "./Signup.css";
@@ -11,11 +11,8 @@ const CreatePost = () => {
   const [authState, setAuthState] = useContext(AuthContext);
   const [postState, setPostState] = useContext(PostContext);
 
-  console.log(postState);
-  console.log(authState);
-
   const initialValues = {
-    userId: authState.userId,
+    userId: authState.user.id,
     title: "",
     imageUrl: "",
     isFlaged: false,
@@ -38,6 +35,9 @@ const CreatePost = () => {
       .catch((error) => console.log(error));
   };
 
+  console.log(postState);
+  console.log(authState);
+
   return (
     <div className="signup">
       <Formik
@@ -58,5 +58,33 @@ const CreatePost = () => {
     </div>
   );
 };
+
+// const CreatePost = () => {
+//   const [fileData, setFileData] = useState("");
+//   const getFile = (e) => {
+//     setFileData(e.target.files[0]);
+//   };
+
+//   const uploadFile = (e) => {
+//     e.preventDefault();
+//     const data = new FormData();
+//     data.append("file", fileData);
+//     axios
+//       .post("http://localhost:5000/api/posts/", data, {
+//         headers: {
+//           Authorization: "Bearer " + localStorage.getItem("token"),
+//           // "Content-type": "application/json",
+//         },
+//       })
+//       .then((response) => console.log(response))
+//       .catch((error) => console.log(error));
+//   };
+//   return (
+//     <form onSubmit={uploadFile}>
+//       <input type="file" name="file" onChange={getFile} />
+//       <input type="submit" name="upload" value="Upload" />
+//     </form>
+//   );
+// };
 
 export default CreatePost;

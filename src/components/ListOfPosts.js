@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { PostContext } from "../context/PostContext";
 import Post from "./Post";
@@ -9,6 +10,8 @@ const ListOfPosts = () => {
   const [authState, setAuthState] = useContext(AuthContext);
   const [posts, setPosts] = useState([]);
 
+  const history = useHistory();
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/posts", {
@@ -17,7 +20,7 @@ const ListOfPosts = () => {
         },
       })
       .then((response) => {
-        setPosts(response.data);
+        setPosts(response.data.posts);
         setPostState(false);
       })
       .catch((error) => console.log(error));
@@ -30,8 +33,9 @@ const ListOfPosts = () => {
           key={key}
           title={post.title}
           imageUrl={post.imageUrl}
-          firstname={post.User.firstname}
-          lastname={post.User.lastname}
+          firstname={post.firstname}
+          lastname={post.lastname}
+          onClick={() => history.push(`/post/${post.id}`)}
         />
       ))}
     </div>
