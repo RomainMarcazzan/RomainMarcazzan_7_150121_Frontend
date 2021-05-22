@@ -12,7 +12,7 @@ const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [postState, setPostState] = useContext(PostContext);
 
-  const onSubmit = (event) => {
+  const onSubmit = () => {
     const data = new FormData();
     data.append("userId", authState.user.id);
     data.append("title", title);
