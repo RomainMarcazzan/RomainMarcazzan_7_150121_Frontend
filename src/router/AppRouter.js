@@ -25,12 +25,12 @@ const AppRouter = () => {
         {authState.isLoggedIn ? (
           <div>
             <Link to="/">Acceuil</Link>
-            <span>
-              {authState.user.firstname} {authState.user.lastname}
-            </span>
             <Link to="/" onClick={logout}>
               Se déconnecter
             </Link>
+            <span>
+              {authState.user.firstname} {authState.user.lastname}
+            </span>
           </div>
         ) : (
           ""

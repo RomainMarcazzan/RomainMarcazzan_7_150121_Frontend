@@ -33,8 +33,8 @@ const ListOfPosts = () => {
           key={key}
           title={post.title}
           imageUrl={post.imageUrl}
-          firstname={post.firstname}
-          lastname={post.lastname}
+          firstname={post.User.firstname}
+          lastname={post.User.lastname}
           onClick={() => history.push(`/post/${post.id}`)}
         />
       ))}

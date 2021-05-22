@@ -20,11 +20,12 @@ const PostPage = () => {
 
   console.log(post);
   return (
-    <div>
-      {post.title} {post.imageUrl}
-      {post.firstname}
-      {post.lastname}
-    </div>
+    <Post
+      title={post.title}
+      imageUrl={post.imageUrl}
+      firstname={post.firstname}
+      lastname={post.lastname}
+    />
   );
 };
 
