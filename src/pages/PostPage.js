@@ -9,14 +9,14 @@ const PostPage = () => {
   const [post, setPost] = useState({});
   const history = useHistory();
 
-  const deleteHandler = () => {
+  const deletePostHandler = () => {
     axios
       .delete(`http://localhost:5000/api/posts/${id}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       })
-      .then((response) => history.push("/"))
+      .then(() => history.push("/"))
       .catch((error) => console.log(error));
   };
 
@@ -29,7 +29,7 @@ const PostPage = () => {
       })
       .then((response) => setPost(response.data))
       .catch((error) => console.log(error));
-  }, []);
+  }, [id]);
 
   return (
     <PostDetails
@@ -38,7 +38,7 @@ const PostPage = () => {
       imageUrl={post.imageUrl}
       firstname={post.firstname}
       lastname={post.lastname}
-      onDelete={deleteHandler}
+      onDelete={deletePostHandler}
     />
   );
 };

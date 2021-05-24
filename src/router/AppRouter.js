@@ -5,6 +5,7 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
 import PostPage from "../pages/PostPage";
+import { Avatar } from "@material-ui/core";
 
 const AppRouter = () => {
   const [authState, setAuthState] = useContext(AuthContext);
@@ -28,9 +29,10 @@ const AppRouter = () => {
             <Link to="/" onClick={logout}>
               Se déconnecter
             </Link>
-            <span>
+            <div>
+              <Avatar>{authState.user.firstname.substring(0, 1)}</Avatar>
               {authState.user.firstname} {authState.user.lastname}
-            </span>
+            </div>
           </div>
         ) : (
           ""

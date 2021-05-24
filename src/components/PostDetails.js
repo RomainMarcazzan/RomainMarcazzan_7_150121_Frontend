@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { CommentContext } from "../context/CommentContext";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Button } from "@material-ui/core";
+import { Avatar, Button } from "@material-ui/core";
 import axios from "axios";
 import Comment from "./Comment";
 
@@ -12,7 +13,7 @@ const PostDetails = (props) => {
 
   const [authState, setAuthState] = useContext(AuthContext);
   const [comments, setComments] = useState([]);
-  const [commentState, setCommentState] = useState(false);
+  const [commentState, setCommentState] = useContext(CommentContext);
 
   const initialValues = {
     userId: authState.user.id,
@@ -25,7 +26,7 @@ const PostDetails = (props) => {
     comment: Yup.string().min(2).required(),
   });
 
-  const submitHandler = (data) => {
+  const submitCommentHandler = (data, { resetForm }) => {
     axios
       .post("http://localhost:5000/api/comments/", data, {
         headers: {
@@ -34,6 +35,7 @@ const PostDetails = (props) => {
       })
       .then(() => {
         setCommentState(true);
+        resetForm({});
       })
       .catch((error) => {
         console.log(error);
@@ -58,13 +60,14 @@ const PostDetails = (props) => {
 
   return (
     <div className="postDetails-container" onClick={props.onClick}>
+      <Avatar />
       <div className="firstname">{props.firstname}</div>
       <div className="lastname">{props.lastname}</div>
       <div className="title">{props.title}</div>
       {authState.user.id === props.userId ? (
         <>
-          <button>Modifier</button>
-          <button onClick={props.onDelete}>Supprimer</button>
+          <Button>Modifier</Button>
+          <Button onClick={props.onDelete}>Supprimer</Button>
         </>
       ) : (
         ""
@@ -72,7 +75,7 @@ const PostDetails = (props) => {
       <img src={props.imageUrl} />
       <Formik
         initialValues={initialValues}
-        onSubmit={submitHandler}
+        onSubmit={submitCommentHandler}
         validationSchema={validationSchema}
       >
         <Form>
@@ -85,9 +88,11 @@ const PostDetails = (props) => {
         {comments.map((value, key) => (
           <Comment
             key={key}
+            commentId={value.id}
             comment={value.comment}
             firstname={value.User.firstname}
             lastname={value.User.lastname}
+            userId={value.User.id}
           />
         ))}
       </div>

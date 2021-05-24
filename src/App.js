@@ -1,6 +1,7 @@
 import React from "react";
 import { AuthProvider } from "./context/AuthContext";
 import { PostProvider } from "./context/PostContext";
+import { CommentProvider, CommentState } from "./context/CommentContext";
 import "./App.css";
 import AppRouter from "./router/AppRouter";
 
@@ -9,7 +10,9 @@ function App() {
     <div className="App">
       <AuthProvider>
         <PostProvider>
-          <AppRouter />
+          <CommentProvider>
+            <AppRouter />
+          </CommentProvider>
         </PostProvider>
       </AuthProvider>
     </div>
