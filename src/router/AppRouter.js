@@ -6,6 +6,7 @@ import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
 import PostPage from "../pages/PostPage";
 import { Avatar } from "@material-ui/core";
+import ProfilePage from "../pages/ProfilePage";
 
 const AppRouter = () => {
   const [authState, setAuthState] = useContext(AuthContext);
@@ -29,10 +30,10 @@ const AppRouter = () => {
             <Link to="/" onClick={logout}>
               Se déconnecter
             </Link>
-            <div>
-              <Avatar>{authState.user.firstname.substring(0, 1)}</Avatar>
+            <Link to={`/profile/${authState.user.id}`}>
+              <Avatar src={authState.user.avatar} />
               {authState.user.firstname} {authState.user.lastname}
-            </div>
+            </Link>
           </div>
         ) : (
           ""
@@ -43,6 +44,7 @@ const AppRouter = () => {
         <Route path="/Signup" component={SignupPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/post/:id" component={PostPage} />
+        <Route path="/profile/:id" component={ProfilePage} />
       </Switch>
     </BrowserRouter>
   );

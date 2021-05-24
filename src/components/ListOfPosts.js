@@ -36,6 +36,7 @@ const ListOfPosts = () => {
           firstname={post.User.firstname}
           lastname={post.User.lastname}
           onClick={() => history.push(`/post/${post.id}`)}
+          avatar={post.User.avatar}
         />
       ))}
     </div>

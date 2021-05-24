@@ -6,8 +6,21 @@ import PostDetails from "../components/PostDetails";
 
 const PostPage = () => {
   const { id } = useParams();
-  const [post, setPost] = useState({});
+  const [postData, setPostData] = useState({});
   const history = useHistory();
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/posts/${id}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        setPostData(response.data.post);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const deletePostHandler = () => {
     axios
@@ -20,24 +33,14 @@ const PostPage = () => {
       .catch((error) => console.log(error));
   };
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/posts/${id}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
-      .then((response) => setPost(response.data))
-      .catch((error) => console.log(error));
-  }, [id]);
-
   return (
     <PostDetails
-      userId={post.userId}
-      title={post.title}
-      imageUrl={post.imageUrl}
-      firstname={post.firstname}
-      lastname={post.lastname}
+      userId={postData.userId}
+      title={postData.title}
+      imageUrl={postData.imageUrl}
+      lastname={postData.User.lastname}
+      firstname={postData.User.firstname}
+      avatar={postData.User.avatar}
       onDelete={deletePostHandler}
     />
   );

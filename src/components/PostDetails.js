@@ -59,8 +59,8 @@ const PostDetails = (props) => {
   }, [commentState]);
 
   return (
-    <div className="postDetails-container" onClick={props.onClick}>
-      <Avatar />
+    <div className="postDetails-container">
+      <Avatar src={props.avatar} />
       <div className="firstname">{props.firstname}</div>
       <div className="lastname">{props.lastname}</div>
       <div className="title">{props.title}</div>
@@ -93,6 +93,7 @@ const PostDetails = (props) => {
             firstname={value.User.firstname}
             lastname={value.User.lastname}
             userId={value.User.id}
+            avatar={value.User.avatar}
           />
         ))}
       </div>
