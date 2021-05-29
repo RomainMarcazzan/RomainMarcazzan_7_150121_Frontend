@@ -12,7 +12,7 @@ const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [postState, setPostState] = useContext(PostContext);
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
     const data = new FormData();
     data.append("userId", authState.user.id);
     data.append("title", title);
@@ -38,8 +38,7 @@ const CreatePost = () => {
         type="text"
         id="title"
         onChange={(event) => {
-          const { value } = event.target;
-          setTitle(value);
+          setTitle(event.target.value);
         }}
       />
       <input

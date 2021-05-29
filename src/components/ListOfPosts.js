@@ -24,7 +24,7 @@ const ListOfPosts = () => {
         setPostState(false);
       })
       .catch((error) => console.log(error));
-  }, [postState]);
+  }, [postState, authState]);
 
   return (
     <div>

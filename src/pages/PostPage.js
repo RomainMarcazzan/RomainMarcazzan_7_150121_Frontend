@@ -87,19 +87,22 @@ const PostPage = () => {
 
   return (
     <div className="postDetails-container">
-      <div className="firstname">{postData.User.firstname}</div>
-      <div className="lastname">{postData.User.lastname}</div>
-      {console.log(postData)}
-      <div className="title">{postData.title}</div>
-      {authState.user.id === postData.userId ? (
-        <>
-          <Button>Modifier</Button>
-          <Button onClick={deletePostHandler}>Supprimer</Button>
-        </>
-      ) : (
-        ""
+      {postData.User && (
+        <div>
+          <div>{postData.User.firstname}</div>
+          <div>{postData.User.lastname}</div>
+          <div className="title">{postData.title}</div>
+          {authState.user.id === postData.userId ? (
+            <>
+              <Button>Modifier</Button>
+              <Button onClick={deletePostHandler}>Supprimer</Button>
+            </>
+          ) : (
+            ""
+          )}
+          <img src={postData.imageUrl} />
+        </div>
       )}
-      <img src={postData.imageUrl} />
       <Formik
         initialValues={initialValues}
         onSubmit={submitCommentHandler}

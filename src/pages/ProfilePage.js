@@ -1,14 +1,31 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import { Button, Avatar } from "@material-ui/core";
-import { useParams } from "react-router";
 
 const ProfilePage = () => {
   const [authState, setAuthState] = useContext(AuthContext);
   const [avatarFile, setAvatarFile] = useState(null);
+  const [profileState, setProfileState] = useState(false);
 
   const { id } = useParams();
+  const history = useHistory();
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/profile/${id}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        setAuthState({ ...authState, user: response.data.user });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [profileState]);
 
   const onSubmit = () => {
     const data = new FormData();
@@ -20,8 +37,9 @@ const ProfilePage = () => {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       })
-      .then((response) => {
-        console.log(response);
+      .then(() => {
+        setProfileState(true);
+        history.push("/");
       })
       .catch((error) => {
         console.log(error);
@@ -29,8 +47,12 @@ const ProfilePage = () => {
   };
 
   return (
-    <div classna="profile-container">
-      <Avatar src={authState.user.avatar} />
+    <div className="profile-container">
+      {authState.user.avatar ? (
+        <Avatar src={authState.user.avatar} />
+      ) : (
+        <Avatar />
+      )}
       <input
         type="file"
         id="avatarFile"
