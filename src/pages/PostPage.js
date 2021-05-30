@@ -8,6 +8,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Avatar, Button } from "@material-ui/core";
 import Comment from "../components/Comment";
+import { LinkedCameraSharp, ThumbUpAlt } from "@material-ui/icons";
 
 const PostPage = () => {
   const { id } = useParams();
@@ -15,8 +16,10 @@ const PostPage = () => {
   const history = useHistory();
 
   const [authState, setAuthState] = useContext(AuthContext);
-  const [comments, setComments] = useState([]);
   const [commentState, setCommentState] = useContext(CommentContext);
+  const [comments, setComments] = useState([]);
+
+  const [isLiked, setIsLiked] = useState(null);
 
   const initialValues = {
     userId: authState.user.id,
@@ -40,6 +43,23 @@ const PostPage = () => {
         setPostData(response.data.post);
       })
       .catch((error) => console.log(error));
+
+    axios
+      .get(`http://localhost:5000/api/likes/${id}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        response.data.map((like) =>
+          like.userId === authState.user.id
+            ? setIsLiked(true)
+            : setIsLiked(false)
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   useEffect(() => {
@@ -85,6 +105,26 @@ const PostPage = () => {
       });
   };
 
+  const LikeHandler = () => {
+    const dataLike = {
+      userId: authState.user.id,
+      postId: id,
+    };
+
+    axios
+      .post(`http://localhost:5000/api/likes/`, dataLike, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        setIsLiked(response.data.isLiked);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="postDetails-container">
       {postData.User && (
@@ -103,6 +143,11 @@ const PostPage = () => {
           <img src={postData.imageUrl} />
         </div>
       )}
+      <ThumbUpAlt
+        onClick={LikeHandler}
+        style={isLiked ? { color: "orange" } : { color: "black" }}
+      />
+
       <Formik
         initialValues={initialValues}
         onSubmit={submitCommentHandler}
