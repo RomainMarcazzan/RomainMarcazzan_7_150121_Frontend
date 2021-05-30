@@ -1,0 +1,29 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.navbar img {
+  height: 3rem;
+}
+
+.navbar__registration {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__registration a {
+  text-decoration: none;
+  margin: auto 1rem;
+}
+
+.navbar__registration__info {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__registration__info div {
+  margin-right: 0.5rem;
+}

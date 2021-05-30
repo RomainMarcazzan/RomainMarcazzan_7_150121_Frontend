@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
+import "./PostPage.css";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { CommentContext } from "../context/CommentContext";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Avatar, Button } from "@material-ui/core";
 import Comment from "../components/Comment";
-import { LinkedCameraSharp, ThumbUpAlt } from "@material-ui/icons";
+import { ThumbUpAlt, Send } from "@material-ui/icons";
 
 const PostPage = () => {
   const { id } = useParams();
@@ -126,52 +127,61 @@ const PostPage = () => {
   };
 
   return (
-    <div className="postDetails-container">
+    <div className="post-page">
       {postData.User && (
-        <div>
-          <div>{postData.User.firstname}</div>
-          <div>{postData.User.lastname}</div>
-          <div className="title">{postData.title}</div>
-          {authState.user.id === postData.userId ? (
-            <>
-              <Button>Modifier</Button>
+        <div className="post-page__container">
+          <div className="post-page__info">
+            <Avatar src={postData.User.avatar} />
+            <div>{postData.User.firstname}</div>
+            <div>{postData.User.lastname}</div>
+          </div>
+          <div className="post-page__title">{postData.title}</div>
+          <img
+            className="post-page__image"
+            src={postData.imageUrl}
+            alt="post"
+          />
+          <div className="post-page__action">
+            {authState.user.id === postData.userId ? (
               <Button onClick={deletePostHandler}>Supprimer</Button>
-            </>
-          ) : (
-            ""
-          )}
-          <img src={postData.imageUrl} />
+            ) : (
+              ""
+            )}
+            <div className="post-page__action__like" onClick={LikeHandler}>
+              <ThumbUpAlt
+                style={isLiked ? { color: "orange" } : { color: "black" }}
+              />
+              <span> J'aime</span>
+            </div>
+          </div>
+          <Formik
+            initialValues={initialValues}
+            onSubmit={submitCommentHandler}
+            validationSchema={validationSchema}
+          >
+            <Form className="post-page__form">
+              {/* <ErrorMessage name="comment" component="span" /> */}
+              <Field placeHolder="Ecrivez un commentaire..." name="comment" />
+              <Button type="submit">
+                <Send />
+              </Button>
+            </Form>
+          </Formik>
+          <div className="comment">
+            {comments.map((value, key) => (
+              <Comment
+                key={key}
+                commentId={value.id}
+                comment={value.comment}
+                firstname={value.User.firstname}
+                lastname={value.User.lastname}
+                userId={value.User.id}
+                avatar={value.User.avatar}
+              />
+            ))}
+          </div>
         </div>
       )}
-      <ThumbUpAlt
-        onClick={LikeHandler}
-        style={isLiked ? { color: "orange" } : { color: "black" }}
-      />
-
-      <Formik
-        initialValues={initialValues}
-        onSubmit={submitCommentHandler}
-        validationSchema={validationSchema}
-      >
-        <Form>
-          <ErrorMessage name="comment" component="span" />
-          <Field name="comment" />
-          <Button type="submit">Envoyer</Button>
-        </Form>
-      </Formik>
-      <div className="comments-container">
-        {comments.map((value, key) => (
-          <Comment
-            key={key}
-            commentId={value.id}
-            comment={value.comment}
-            firstname={value.User.firstname}
-            lastname={value.User.lastname}
-            userId={value.User.id}
-            avatar={value.User.avatar}
-          />
-        ))}
-      </div>
     </div>
   );
 };

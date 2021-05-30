@@ -1,3 +1,36 @@
-.post-container {
+.post {
   cursor: pointer;
+  border: 1px solid grey;
+  border-radius: 2rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.post__info-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.post__info-container__avatar {
+  margin-right: 0.5rem;
+}
+
+.post__info-container__firstname {
+  margin-right: 0.5rem;
+}
+
+.post__title {
+  margin-bottom: 1rem;
+}
+
+.post__image {
+  height: 25rem;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }

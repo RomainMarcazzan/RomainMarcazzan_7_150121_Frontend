@@ -1,4 +1,6 @@
 import React, { useContext } from "react";
+import "./AppRouter.css";
+import logo from "../images/logo.png";
 import { AuthContext } from "../context/AuthContext";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import HomePage from "../pages/HomePage";
@@ -18,21 +20,26 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <div className="navbar">
+        <img src={logo} alt="logo groupomania" />
         {!authState.isLoggedIn && (
-          <>
+          <div className="navbar__registration">
             <Link to="/login">Se connecter</Link>
             <Link to="/Signup">S'inscrire</Link>
-          </>
+          </div>
         )}
         {authState.isLoggedIn ? (
-          <div>
+          <div className="navbar__registration">
             <Link to="/">Acceuil</Link>
             <Link to="/" onClick={logout}>
               Se déconnecter
             </Link>
-            <Link to={`/profile/${authState.user.id}`}>
+            <Link
+              className="navbar__registration__info"
+              to={`/profile/${authState.user.id}`}
+            >
               <Avatar src={authState.user.avatar} />
-              {authState.user.firstname} {authState.user.lastname}
+              <div>{authState.user.firstname}</div>
+              <div>{authState.user.lastname}</div>
             </Link>
           </div>
         ) : (

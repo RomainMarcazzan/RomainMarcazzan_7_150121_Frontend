@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
+import "./Signup.css";
+import logo_center from "../images/logo-center.png";
 import { AuthContext } from "../context/AuthContext";
 import { useHistory } from "react-router-dom";
-import "./Signup.css";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -46,27 +47,30 @@ const Signup = () => {
 
   return (
     <div className="signup">
-      <Formik
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
-      >
-        <Form>
-          <label>Email: </label>
-          <ErrorMessage name="email" component="i" />
-          <Field name="email" />
-          <label>Mot de passe: </label>
-          <ErrorMessage name="password" component="i" />
-          <Field type="password" name="password" />
-          <label>Prénom: </label>
-          <ErrorMessage name="firstname" component="i" />
-          <Field name="firstname" />
-          <label>Nom: </label>
-          <ErrorMessage name="lastname" component="i" />
-          <Field name="lastname" />
-          <Button type="submit">S'inscrire</Button>
-        </Form>
-      </Formik>
+      <div className="registration-container">
+        <img src={logo_center} />
+        <Formik
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+          validationSchema={validationSchema}
+        >
+          <Form>
+            <label>Email: </label>
+            <ErrorMessage name="email" component="i" />
+            <Field name="email" />
+            <label>Mot de passe: </label>
+            <ErrorMessage name="password" component="i" />
+            <Field type="password" name="password" />
+            <label>Prénom: </label>
+            <ErrorMessage name="firstname" component="i" />
+            <Field name="firstname" />
+            <label>Nom: </label>
+            <ErrorMessage name="lastname" component="i" />
+            <Field name="lastname" />
+            <Button type="submit">S'inscrire</Button>
+          </Form>
+        </Formik>
+      </div>
     </div>
   );
 };

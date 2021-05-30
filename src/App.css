@@ -1,4 +1,9 @@
-.App {
+.app {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+/* .App {
+
   text-align: center;
 }
 
@@ -35,4 +40,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

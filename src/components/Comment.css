@@ -1,0 +1,29 @@
+.comment-container {
+  margin: 0.5rem auto;
+  width: 90%;
+}
+
+.comment-container__info {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.comment-container__info div:nth-child(2) {
+  margin: auto 0.4rem;
+}
+
+.comment-container__comment {
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  background-color: rgb(238, 238, 238);
+  padding: 0.4rem;
+}
+
+.comment-container__actions {
+  display: flex;
+  justify-content: space-evenly;
+}

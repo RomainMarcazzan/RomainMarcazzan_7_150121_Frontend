@@ -1,0 +1,30 @@
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 5rem);
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid grey;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.profile-container__title {
+  margin: 1rem auto;
+  border-bottom: 1px solid grey;
+}
+
+.profile-container__avatar {
+  margin-bottom: 1rem;
+  width: 8rem;
+  height: 8rem;
+}
+
+.profile-container__file {
+  margin-bottom: 1rem;
+}

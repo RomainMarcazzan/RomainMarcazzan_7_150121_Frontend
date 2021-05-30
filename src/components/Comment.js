@@ -1,10 +1,12 @@
-import { Avatar, Button } from "@material-ui/core";
 import React, { useContext, useState } from "react";
+import "./Comment.css";
+import { Avatar, Button } from "@material-ui/core";
 import { AuthContext } from "../context/AuthContext";
 import { CommentContext } from "../context/CommentContext";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
+import { Send } from "@material-ui/icons";
 
 const Comment = (props) => {
   const [authState, setAuthState] = useContext(AuthContext);
@@ -47,10 +49,16 @@ const Comment = (props) => {
 
   return (
     <div className="comment-container">
-      <Avatar src={props.avatar} />
-      <div className="firstname">{props.firstname}</div>
-      <div className="lastname">{props.lastname}</div>
-      {!modify ? <div className="comment">{props.comment}</div> : ""}
+      <div className="comment-container__info">
+        <Avatar src={props.avatar} />
+        <div className="firstname">{props.firstname}</div>
+        <div className="lastname">{props.lastname}</div>
+      </div>
+      {!modify ? (
+        <div className="comment-container__comment">{props.comment}</div>
+      ) : (
+        ""
+      )}
       {modify ? (
         <Formik
           initialValues={initialValues}
@@ -60,7 +68,9 @@ const Comment = (props) => {
           <Form>
             <ErrorMessage name="comment" component="span" />
             <Field name="comment" />
-            <Button type="submit">Modifier</Button>
+            <Button type="submit">
+              <Send />
+            </Button>
           </Form>
         </Formik>
       ) : (
@@ -68,7 +78,7 @@ const Comment = (props) => {
       )}
 
       {authState.user.id === props.userId ? (
-        <>
+        <div className="comment-container__actions">
           <Button
             onClick={() => {
               setModify(true);
@@ -77,7 +87,7 @@ const Comment = (props) => {
             Modifier
           </Button>
           <Button onClick={deleteCommentHandler}>Supprimer</Button>
-        </>
+        </div>
       ) : (
         ""
       )}

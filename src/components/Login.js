@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useHistory } from "react-router-dom";
 import "./Login.css";
+import logo_center from "../images/logo-center.png";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -40,22 +41,25 @@ const Login = () => {
   };
 
   return (
-    <div className="signup">
-      <Formik
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
-      >
-        <Form>
-          <label>Email: </label>
-          <ErrorMessage name="email" component="i" />
-          <Field name="email" />
-          <label>Mot de passe: </label>
-          <ErrorMessage name="password" component="i" />
-          <Field type="password" name="password" />
-          <Button type="submit">Se connecter</Button>
-        </Form>
-      </Formik>
+    <div className="login">
+      <div className="registration-container">
+        <img src={logo_center} />
+        <Formik
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+          validationSchema={validationSchema}
+        >
+          <Form>
+            <label>Email: </label>
+            <ErrorMessage name="email" component="i" />
+            <Field name="email" />
+            <label>Mot de passe: </label>
+            <ErrorMessage name="password" component="i" />
+            <Field type="password" name="password" />
+            <Button type="submit">Se connecter</Button>
+          </Form>
+        </Formik>
+      </div>
     </div>
   );
 };

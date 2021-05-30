@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import "./ProfilePage.css";
 import { useHistory, useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
@@ -47,23 +48,30 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="profile-container">
-      {authState.user.avatar ? (
-        <Avatar src={authState.user.avatar} />
-      ) : (
-        <Avatar />
-      )}
-      <input
-        type="file"
-        id="avatarFile"
-        onChange={(event) => {
-          const avatarFile = event.target.files[0];
-          setAvatarFile(avatarFile);
-        }}
-      />
-      <Button type="button" onClick={onSubmit}>
-        Envoyer
-      </Button>
+    <div className="profile">
+      <div className="profile-container">
+        <span className="profile-container__title">Modifier avatar</span>
+        {authState.user.avatar ? (
+          <Avatar
+            className="profile-container__avatar"
+            src={authState.user.avatar}
+          />
+        ) : (
+          <Avatar />
+        )}
+        <input
+          className="profile-container__file"
+          type="file"
+          id="avatarFile"
+          onChange={(event) => {
+            const avatarFile = event.target.files[0];
+            setAvatarFile(avatarFile);
+          }}
+        />
+        <Button type="button" onClick={onSubmit}>
+          Modifier
+        </Button>
+      </div>
     </div>
   );
 };

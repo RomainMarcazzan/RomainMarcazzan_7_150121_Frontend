@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import "./ListOfPosts.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
@@ -27,7 +28,7 @@ const ListOfPosts = () => {
   }, [postState, authState]);
 
   return (
-    <div>
+    <div className="list-of-posts">
       {posts.map((post, key) => (
         <Post
           key={key}
