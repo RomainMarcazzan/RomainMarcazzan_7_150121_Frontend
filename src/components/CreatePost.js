@@ -12,7 +12,8 @@ const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [postState, setPostState] = useContext(PostContext);
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     const data = new FormData();
     data.append("userId", authState.user.id);
     data.append("title", title);
@@ -26,14 +27,16 @@ const CreatePost = () => {
         },
       })
       .then(() => {
+        setTitle("");
         setPostState(true);
+        e.target.reset();
       })
       .catch((error) => {
         console.log(error);
       });
   };
   return (
-    <div className="create-post">
+    <form onSubmit={onSubmit} className="create-post">
       <input
         placeholder="Dites quelque chose..."
         className="create-post__title"
@@ -53,15 +56,11 @@ const CreatePost = () => {
             setFile(file);
           }}
         />
-        <Button
-          className="create-post__button"
-          type="button"
-          onClick={onSubmit}
-        >
+        <Button className="create-post__button" type="submit">
           Publier
         </Button>
       </div>
-    </div>
+    </form>
   );
 };
 
