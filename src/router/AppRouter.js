@@ -20,7 +20,7 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <div className="navbar">
-        <img src={logo} alt="logo groupomania" />
+        <img className="navbar__logo" src={logo} alt="logo groupomania" />
         {!authState.isLoggedIn && (
           <div className="navbar__registration">
             <Link to="/login">Se connecter</Link>
@@ -37,9 +37,16 @@ const AppRouter = () => {
               className="navbar__registration__info"
               to={`/profile/${authState.user.id}`}
             >
-              <Avatar src={authState.user.avatar} />
-              <div>{authState.user.firstname}</div>
-              <div>{authState.user.lastname}</div>
+              <Avatar
+                className="navbar__registration__info__avatar"
+                src={authState.user.avatar}
+              />
+              <div className="navbar__registration__info__firstname">
+                {authState.user.firstname}
+              </div>
+              <div className="navbar__registration__info__lastname">
+                {authState.user.lastname}
+              </div>
             </Link>
           </div>
         ) : (

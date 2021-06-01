@@ -4,6 +4,7 @@ import { PostContext } from "../context/PostContext";
 import "./CreatePost.css";
 import axios from "axios";
 import { Button } from "@material-ui/core";
+import { Gif, Image } from "@material-ui/icons";
 
 const CreatePost = () => {
   const [authState, setAuthState] = useContext(AuthContext);
@@ -37,18 +38,23 @@ const CreatePost = () => {
   };
   return (
     <form onSubmit={onSubmit} className="create-post">
-      <input
-        placeholder="Dites quelque chose..."
-        className="create-post__title"
-        type="text"
-        id="title"
-        onChange={(event) => {
-          setTitle(event.target.value);
-        }}
-      />
-      <div className="create-post__file-container">
+      <div className="create-post__title-container">
         <input
-          className="create-post__file"
+          placeholder="Dites quelque chose..."
+          className="create-post__title"
+          type="text"
+          id="title"
+          onChange={(event) => {
+            setTitle(event.target.value);
+          }}
+        />
+      </div>
+      <div className="create-post__file-container">
+        <label for="file" className="create-post__file">
+          <Image />
+          <Gif fontSize="large" />
+        </label>
+        <input
           type="file"
           id="file"
           onChange={(event) => {

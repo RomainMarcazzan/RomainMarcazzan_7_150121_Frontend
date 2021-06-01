@@ -131,7 +131,10 @@ const PostPage = () => {
       {postData.User && (
         <div className="post-page__container">
           <div className="post-page__info">
-            <Avatar src={postData.User.avatar} />
+            <Avatar
+              className="post-page__info__avatar"
+              src={postData.User.avatar}
+            />
             <div>{postData.User.firstname}</div>
             <div>{postData.User.lastname}</div>
           </div>
@@ -149,7 +152,7 @@ const PostPage = () => {
             )}
             <div className="post-page__action__like" onClick={LikeHandler}>
               <ThumbUpAlt
-                style={isLiked ? { color: "orange" } : { color: "black" }}
+                style={isLiked ? { color: "#fd2d01" } : { color: "black" }}
               />
               <span> J'aime</span>
             </div>
@@ -161,9 +164,9 @@ const PostPage = () => {
           >
             <Form className="post-page__form">
               {/* <ErrorMessage name="comment" component="span" /> */}
-              <Field placeHolder="Ecrivez un commentaire..." name="comment" />
+              <Field placeholder="Ecrivez un commentaire..." name="comment" />
               <Button type="submit">
-                <Send />
+                <Send className="post-page__form__send" />
               </Button>
             </Form>
           </Formik>

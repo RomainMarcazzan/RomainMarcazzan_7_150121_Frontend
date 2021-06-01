@@ -12,6 +12,7 @@
   border: 1px solid grey;
   padding: 1rem;
   border-radius: 1rem;
+  box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #ffffff;
 }
 
 .profile-container__title {
@@ -19,12 +20,40 @@
   border-bottom: 1px solid grey;
 }
 
+.profile-container__actions {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
 .profile-container__avatar {
+  height: 10rem !important;
+  width: 10rem !important;
   margin-bottom: 1rem;
-  width: 8rem;
-  height: 8rem;
+  border-radius: 50%;
+  box-shadow: 0px 0px 2px #5f5f5f, 0px 0px 0px 5px #ecf0f3, 8px 8px 15px #a7aaaf,
+    -8px -8px 15px #ffffff;
 }
 
 .profile-container__file {
-  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  color: #fd2d01;
+  border-radius: 50%;
+  box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #ffffff;
+}
+
+.profile-container__file:hover {
+  box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff;
+}
+
+label {
+  cursor: pointer;
+}
+
+.profile-container__send:hover {
+  color: #fd2d01;
 }
