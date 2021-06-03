@@ -43,7 +43,7 @@
 .post-page__action {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .post-page__action__like {
@@ -52,6 +52,18 @@
   cursor: pointer;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+}
+
+.post-page__action__report {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-page__action span:hover {
+  color: #fd2d01;
 }
 
 .post-page__form {

@@ -18,7 +18,6 @@ const CreatePost = () => {
     const data = new FormData();
     data.append("userId", authState.user.id);
     data.append("title", title);
-    data.append("isFlaged", false);
     data.append("imageUrl", file);
 
     axios
@@ -50,7 +49,7 @@ const CreatePost = () => {
         />
       </div>
       <div className="create-post__file-container">
-        <label for="file" className="create-post__file">
+        <label htmlFor="file" className="create-post__file">
           <Image />
           <Gif fontSize="large" />
         </label>

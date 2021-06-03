@@ -66,8 +66,8 @@ const Comment = (props) => {
           validationSchema={validationSchema}
         >
           <Form>
-            <ErrorMessage name="comment" component="span" />
-            <Field name="comment" />
+            {/* <ErrorMessage name="comment" component="span" /> */}
+            <Field className="comment-container__form-modify" name="comment" />
             <Button type="submit">
               <Send />
             </Button>

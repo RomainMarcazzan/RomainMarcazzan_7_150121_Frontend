@@ -1,0 +1,28 @@
+.admin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin__reports {
+  margin-top: 3rem;
+}
+
+table th,
+td {
+  border: 1px solid black;
+  text-align: center;
+  padding: 0.3rem;
+}
+
+.admin__table__remove {
+  cursor: pointer;
+}
+
+.admin__table__remove:hover {
+  color: #fd2d01;
+}
+
+.admin__users {
+  margin-top: 3rem;
+}

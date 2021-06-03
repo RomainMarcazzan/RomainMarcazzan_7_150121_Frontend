@@ -9,7 +9,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Avatar, Button } from "@material-ui/core";
 import Comment from "../components/Comment";
-import { ThumbUpAlt, Send } from "@material-ui/icons";
+import { ThumbUpAlt, Send, DeleteForever, Report } from "@material-ui/icons";
 
 const PostPage = () => {
   const { id } = useParams();
@@ -21,11 +21,11 @@ const PostPage = () => {
   const [comments, setComments] = useState([]);
 
   const [isLiked, setIsLiked] = useState(null);
+  const [isReported, setIsReported] = useState(null);
 
   const initialValues = {
     userId: authState.user.id,
     comment: "",
-    isFlaged: false,
     postId: id,
   };
 
@@ -56,6 +56,23 @@ const PostPage = () => {
           like.userId === authState.user.id
             ? setIsLiked(true)
             : setIsLiked(false)
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    axios
+      .get(`http://localhost:5000/api/reports/${id}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        response.data.map((report) =>
+          report.userId === authState.user.id
+            ? setIsReported(true)
+            : setIsReported(false)
         );
       })
       .catch((error) => {
@@ -126,6 +143,25 @@ const PostPage = () => {
       });
   };
 
+  const reportHandler = () => {
+    const dataPost = {
+      userId: authState.user.id,
+      postId: id,
+    };
+    axios
+      .post(`http://localhost:5000/api/reports/`, dataPost, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        setIsReported(response.data.isReported);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="post-page">
       {postData.User && (
@@ -146,15 +182,23 @@ const PostPage = () => {
           />
           <div className="post-page__action">
             {authState.user.id === postData.userId ? (
-              <Button onClick={deletePostHandler}>Supprimer</Button>
+              <Button onClick={deletePostHandler}>
+                <DeleteForever /> <span>Supprimer</span>
+              </Button>
             ) : (
               ""
             )}
             <div className="post-page__action__like" onClick={LikeHandler}>
+              <span> j'aime</span>
               <ThumbUpAlt
                 style={isLiked ? { color: "#fd2d01" } : { color: "black" }}
               />
-              <span> J'aime</span>
+            </div>
+            <div className="post-page__action__report" onClick={reportHandler}>
+              <span> signaler</span>
+              <Report
+                style={isReported ? { color: "#fd2d01" } : { color: "black" }}
+              />
             </div>
           </div>
           <Formik

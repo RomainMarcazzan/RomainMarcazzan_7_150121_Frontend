@@ -9,6 +9,7 @@ import SignupPage from "../pages/SignupPage";
 import PostPage from "../pages/PostPage";
 import { Avatar } from "@material-ui/core";
 import ProfilePage from "../pages/ProfilePage";
+import AdminPage from "../pages/AdminPage";
 
 const AppRouter = () => {
   const [authState, setAuthState] = useContext(AuthContext);
@@ -30,6 +31,7 @@ const AppRouter = () => {
         {authState.isLoggedIn ? (
           <div className="navbar__registration">
             <Link to="/">Acceuil</Link>
+            {authState.user.isAdmin ? <Link to="/admin">Admin</Link> : ""}
             <Link to="/" onClick={logout}>
               Se déconnecter
             </Link>
@@ -59,6 +61,7 @@ const AppRouter = () => {
         <Route path="/login" component={LoginPage} />
         <Route path="/post/:id" component={PostPage} />
         <Route path="/profile/:id" component={ProfilePage} />
+        <Route path="/admin" component={AdminPage} />
       </Switch>
     </BrowserRouter>
   );

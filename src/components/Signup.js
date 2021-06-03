@@ -17,7 +17,6 @@ const Signup = () => {
     password: "",
     firstname: "",
     lastname: "",
-    avatar: "",
     isAdmin: false,
   };
 

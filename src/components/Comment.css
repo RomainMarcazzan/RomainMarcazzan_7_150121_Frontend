@@ -23,6 +23,13 @@
   max-width: 30rem;
 }
 
+.comment-container__form-modify {
+  width: 80%;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  outline: none;
+}
+
 .comment-container__actions {
   display: flex;
   justify-content: space-evenly;
