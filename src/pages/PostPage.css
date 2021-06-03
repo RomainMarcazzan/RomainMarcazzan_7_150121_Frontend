@@ -69,7 +69,7 @@
 .post-page__form {
   display: flex;
   justify-content: space-between;
-  margin: 0.5rem 0 0.5rem 0.5rem;
+  margin: 0.7rem;
 }
 
 .post-page__form input {

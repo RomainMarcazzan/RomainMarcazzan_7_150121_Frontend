@@ -1,17 +1,19 @@
 .create-post {
   display: flex;
+  width: 60%;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   border-radius: 2.5rem;
-  width: 60%;
-  margin-bottom: 2rem;
+  padding: 1rem;
   background: #ecf0f3;
+  margin-top: 3rem;
   box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #ffffff;
 }
 
 .create-post__title-container {
-  width: 90%;
-  margin: 1rem auto;
+  width: 100%;
+  margin-bottom: 1rem;
   border-radius: 2.5rem;
   box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff;
 }
@@ -19,18 +21,19 @@
 .create-post__title {
   width: 90%;
   border: none;
+  margin: 0.5rem 0.8rem;
   outline: none;
   background: none;
   font-size: 1rem;
   color: #555;
-  padding: 10px 5px;
+  padding: 0.4rem;
+  border-radius: 2.5rem;
 }
 
 .create-post__file-container {
   display: flex;
   align-items: center;
-  margin-bottom: 0.5rem;
-  width: 50%;
+  width: 100%;
   justify-content: space-evenly;
 }
 

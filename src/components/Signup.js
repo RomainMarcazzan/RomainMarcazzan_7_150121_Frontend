@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./Signup.css";
-import logo_center from "../images/logo-center.png";
+import logo_background from "../images/logo-background.png";
 import { AuthContext } from "../context/AuthContext";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -45,31 +45,44 @@ const Signup = () => {
   };
 
   return (
-    <div className="signup">
-      <div className="registration-container">
-        <img src={logo_center} />
-        <Formik
-          initialValues={initialValues}
-          onSubmit={onSubmit}
-          validationSchema={validationSchema}
-        >
-          <Form>
-            <label>Email: </label>
-            <ErrorMessage name="email" component="i" />
-            <Field name="email" />
-            <label>Mot de passe: </label>
-            <ErrorMessage name="password" component="i" />
-            <Field type="password" name="password" />
-            <label>Prénom: </label>
-            <ErrorMessage name="firstname" component="i" />
-            <Field name="firstname" />
-            <label>Nom: </label>
-            <ErrorMessage name="lastname" component="i" />
-            <Field name="lastname" />
-            <Button type="submit">S'inscrire</Button>
-          </Form>
-        </Formik>
-      </div>
+    <div className="signup__container">
+      <img src={logo_background} className="signup__container__image" />
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
+        <Form className="signup__container__form">
+          <ErrorMessage name="email" component="i" />
+          <Field
+            placeholder="email"
+            className="signup__container__email"
+            name="email"
+          />
+          <ErrorMessage name="password" component="i" />
+          <Field
+            className="signup__container__password"
+            type="password"
+            name="password"
+            placeholder="password"
+          />
+          <ErrorMessage name="firstname" component="i" />
+          <Field
+            placeholder="prénom"
+            className="signup__container__firstname"
+            name="firstname"
+          />
+          <ErrorMessage name="lastname" component="i" />
+          <Field
+            placeholder="nom"
+            className="signup__container__lastname"
+            name="lastname"
+          />
+          <Button className="signup__container__button" type="submit">
+            S'inscrire
+          </Button>
+        </Form>
+      </Formik>
     </div>
   );
 };
