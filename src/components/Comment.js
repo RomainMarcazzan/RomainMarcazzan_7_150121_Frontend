@@ -3,7 +3,7 @@ import "./Comment.css";
 import { Avatar, Button } from "@material-ui/core";
 import { AuthContext } from "../context/AuthContext";
 import { CommentContext } from "../context/CommentContext";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
 import { Send } from "@material-ui/icons";
@@ -44,7 +44,6 @@ const Comment = (props) => {
         resetForm({});
       })
       .catch((error) => console.log(error));
-    console.log(data);
   };
 
   return (
@@ -77,7 +76,7 @@ const Comment = (props) => {
         ""
       )}
 
-      {authState.user.id === props.userId ? (
+      {authState.user.id === props.userId && !modify ? (
         <div className="comment-container__actions">
           <Button
             onClick={() => {

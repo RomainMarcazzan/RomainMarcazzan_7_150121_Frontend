@@ -35,6 +35,8 @@
 
 .post__image {
   height: 25rem;
+  width: 25rem;
+  object-fit: cover;
   border-radius: 1rem;
 }
 

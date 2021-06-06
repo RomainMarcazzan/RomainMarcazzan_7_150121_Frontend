@@ -46,7 +46,11 @@ const Signup = () => {
 
   return (
     <div className="signup__container">
-      <img src={logo_background} className="signup__container__image" />
+      <img
+        src={logo_background}
+        alt="logo groupomania"
+        className="signup__container__image"
+      />
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}

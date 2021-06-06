@@ -27,6 +27,13 @@
   width: 100%;
 }
 
+.profile-container__delete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
 .profile-container__avatar {
   height: 10rem !important;
   width: 10rem !important;

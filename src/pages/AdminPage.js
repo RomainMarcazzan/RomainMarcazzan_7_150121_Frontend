@@ -36,7 +36,7 @@ const AdminPage = () => {
       .then(() =>
         setReportData(
           reportData.filter((report) => {
-            return report.id != reportId;
+            return report.id !== reportId;
           })
         )
       )
@@ -53,7 +53,7 @@ const AdminPage = () => {
       .then(() =>
         setProfileData(
           profileData.filter((profile) => {
-            return profile.id != profileId;
+            return profile.id !== profileId;
           })
         )
       )

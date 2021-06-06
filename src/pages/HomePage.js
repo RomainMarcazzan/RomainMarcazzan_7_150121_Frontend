@@ -16,7 +16,7 @@ const HomePage = () => {
           <ambientLight intensity={0.5} />
           <directionalLight color="white" position={[-5, 5, 0]} />
           <Suspense fallback={null}>
-            <Model onClick={console.log("test")} />
+            <Model />
           </Suspense>
         </Canvas>
       ) : (
