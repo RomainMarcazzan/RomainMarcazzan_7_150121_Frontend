@@ -49,7 +49,11 @@ const CreatePost = () => {
         />
       </div>
       <div className="create-post__file-container">
-        <label htmlFor="file" className="create-post__file">
+        <label
+          htmlFor="file"
+          className="create-post__file"
+          aria-label="Image ou Gif"
+        >
           <Image />
           <Gif fontSize="large" />
         </label>

@@ -64,7 +64,7 @@ const Signup = () => {
             className="signup__container__password"
             type="password"
             name="password"
-            placeholder="password"
+            placeholder="mot de passe"
           />
           <ErrorMessage name="firstname" component="i" />
           <Field

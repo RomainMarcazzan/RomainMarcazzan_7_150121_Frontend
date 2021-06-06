@@ -1,4 +1,8 @@
-.home-page {
+.globe-container {
+  height: calc(100vh - 3rem) !important;
+}
+
+.home-page__posts {
   display: flex;
   flex-direction: column;
   align-items: center;

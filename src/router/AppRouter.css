@@ -17,8 +17,12 @@
 .navbar__registration a {
   text-decoration: none;
   margin: auto 1rem;
-  color: #fd2d01;
+  color: black;
   font-weight: bold;
+}
+
+.navbar__registration a:hover {
+  color: #fd2d01;
 }
 
 .navbar__registration__info {
