@@ -22,12 +22,13 @@ const ProfilePage = () => {
         },
       })
       .then((response) => {
-        setAuthState({ ...authState, user: response.data.user });
+        console.log(response.data);
+        setAuthState({ ...authState, user: response.data });
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [profileState]);
+  }, [profileState, id, setAuthState]);
 
   const changeAvatarHandler = () => {
     const data = new FormData();

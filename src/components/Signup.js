@@ -10,7 +10,7 @@ import { Button } from "@material-ui/core";
 
 const Signup = () => {
   const history = useHistory("/");
-  const [authState, setAuthState] = useContext(AuthContext);
+  const [, setAuthState] = useContext(AuthContext);
 
   const initialValues = {
     email: "",

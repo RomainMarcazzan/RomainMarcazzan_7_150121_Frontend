@@ -16,7 +16,7 @@ const PostPage = () => {
   const [postData, setPostData] = useState({});
   const history = useHistory();
 
-  const [authState, setAuthState] = useContext(AuthContext);
+  const [authState] = useContext(AuthContext);
   const [commentState, setCommentState] = useContext(CommentContext);
   const [comments, setComments] = useState([]);
 
@@ -78,7 +78,7 @@ const PostPage = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [authState.user.id, id]);
 
   useEffect(() => {
     axios
@@ -88,13 +88,14 @@ const PostPage = () => {
         },
       })
       .then((response) => {
-        setComments(response.data);
+        setComments(response.data.comments);
         setCommentState(false);
+        console.log(response.data.comments);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [commentState]);
+  }, [commentState, setCommentState, id]);
 
   const deletePostHandler = () => {
     axios
@@ -108,6 +109,7 @@ const PostPage = () => {
   };
 
   const submitCommentHandler = (data, { resetForm }) => {
+    console.log(data);
     axios
       .post("http://localhost:5000/api/comments/", data, {
         headers: {
@@ -174,6 +176,9 @@ const PostPage = () => {
             <div>{postData.User.firstname}</div>
             <div>{postData.User.lastname}</div>
           </div>
+          <div className="post-page__date">
+            {new Date(postData.createdAt).toLocaleDateString("fr-FR")}
+          </div>
           <div className="post-page__title">{postData.title}</div>
           <img
             className="post-page__image"
@@ -224,6 +229,7 @@ const PostPage = () => {
                 lastname={value.User.lastname}
                 userId={value.User.id}
                 avatar={value.User.avatar}
+                updatedAt={value.updatedAt}
               />
             ))}
           </div>

@@ -5,13 +5,16 @@ import "./CreatePost.css";
 import axios from "axios";
 import { Button } from "@material-ui/core";
 import { Gif, Image } from "@material-ui/icons";
+import ReactModal from "react-modal";
 
 const CreatePost = () => {
-  const [authState, setAuthState] = useContext(AuthContext);
+  const [authState] = useContext(AuthContext);
 
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState("");
-  const [postState, setPostState] = useContext(PostContext);
+  const [, setPostState] = useContext(PostContext);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -32,11 +35,29 @@ const CreatePost = () => {
         e.target.reset();
       })
       .catch((error) => {
-        console.log(error);
+        setIsOpenModal(true);
+        setErrorMessage(error.response.statusText);
       });
   };
   return (
     <form onSubmit={onSubmit} className="create-post">
+      <ReactModal
+        isOpen={isOpenModal}
+        style={{
+          content: {
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            borderRadius: "2rem",
+            height: "6rem",
+          },
+        }}
+      >
+        <div className="error-container">
+          <p> Un post doit contenir au minimum un titre et/ou une image</p>
+          <button onClick={() => setIsOpenModal(false)}>Ok</button>
+        </div>
+      </ReactModal>
       <div className="create-post__title-container">
         <input
           placeholder="Dites quelque chose..."

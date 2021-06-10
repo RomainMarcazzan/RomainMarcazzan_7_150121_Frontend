@@ -7,7 +7,7 @@ import ListOfPosts from "../components/ListOfPosts";
 import { AuthContext } from "../context/AuthContext";
 
 const HomePage = () => {
-  const [authState, setAuthState] = useContext(AuthContext);
+  const [authState] = useContext(AuthContext);
 
   return (
     <div className="home-page">

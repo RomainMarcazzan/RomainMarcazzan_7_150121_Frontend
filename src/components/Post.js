@@ -10,7 +10,7 @@ const Post = (props) => {
         <div className="post__info-container__lastname">{props.lastname}</div>
       </div>
       <div className="post__title">{props.title}</div>
-      <img className="post__image" src={props.imageUrl} />
+      <img className="post__image" src={props.imageUrl} alt="post" />
     </div>
   );
 };

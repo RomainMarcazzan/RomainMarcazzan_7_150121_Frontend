@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useHistory } from "react-router-dom";
 import "./Login.css";
@@ -7,10 +7,14 @@ import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Button } from "@material-ui/core";
+import ReactModal from "react-modal";
+
+ReactModal.setAppElement("#root");
 
 const Login = () => {
-  const [authState, setAuthState] = useContext(AuthContext);
-
+  const [, setAuthState] = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const history = useHistory();
 
   const initialValues = {
@@ -27,22 +31,49 @@ const Login = () => {
     axios
       .post("http://localhost:5000/api/auth/login", data)
       .then((response) => {
-        localStorage.setItem("token", response.data.token);
         if (response.data.error) {
           setAuthState({ isLoggedIn: false });
         } else {
+          localStorage.setItem("token", response.data.token);
           setAuthState({
             isLoggedIn: true,
             user: response.data.user,
           });
           history.push("/");
         }
+      })
+      .catch((error) => {
+        if (error.response) {
+          setErrorMessage(error.response.data.error);
+          setIsOpenModal(true);
+        } else console.log(error);
       });
   };
 
   return (
     <div className="login__container">
-      <img src={logo_background} className="login__container__image" />
+      <ReactModal
+        isOpen={isOpenModal}
+        style={{
+          content: {
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            borderRadius: "2rem",
+            height: "6rem",
+          },
+        }}
+      >
+        <div className="error-container">
+          <p> {errorMessage}</p>
+          <button onClick={() => setIsOpenModal(false)}>Ok</button>
+        </div>
+      </ReactModal>
+      <img
+        src={logo_background}
+        className="login__container__image"
+        alt="logo_globe"
+      />
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}

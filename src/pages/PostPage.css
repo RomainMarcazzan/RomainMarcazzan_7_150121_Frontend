@@ -32,6 +32,12 @@
   margin: auto 0.4rem;
 }
 
+.post-page__date {
+  font-size: 0.7rem;
+  margin: 0 0 0.5rem 0.5rem;
+  color: grey;
+}
+
 .post-page__title {
   margin: 0 0 0.5rem 0.5rem;
 }

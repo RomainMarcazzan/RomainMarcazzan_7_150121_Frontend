@@ -9,8 +9,8 @@ import * as Yup from "yup";
 import { Send } from "@material-ui/icons";
 
 const Comment = (props) => {
-  const [authState, setAuthState] = useContext(AuthContext);
-  const [commentState, setCommentState] = useContext(CommentContext);
+  const [authState] = useContext(AuthContext);
+  const [, setCommentState] = useContext(CommentContext);
   const [modify, setModify] = useState(false);
   const initialValues = {
     comment: props.comment,
@@ -52,6 +52,9 @@ const Comment = (props) => {
         <Avatar src={props.avatar} />
         <div className="firstname">{props.firstname}</div>
         <div className="lastname">{props.lastname}</div>
+      </div>
+      <div className="comment-container__date">
+        {new Date(props.updatedAt).toLocaleDateString("fr-FR")}
       </div>
       {!modify ? (
         <div className="comment-container__comment">{props.comment}</div>

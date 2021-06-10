@@ -2,13 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import "./ListOfPosts.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
 import { PostContext } from "../context/PostContext";
 import Post from "./Post";
 
 const ListOfPosts = () => {
   const [postState, setPostState] = useContext(PostContext);
-  const [authState, setAuthState] = useContext(AuthContext);
   const [posts, setPosts] = useState([]);
 
   const history = useHistory();
@@ -25,13 +23,13 @@ const ListOfPosts = () => {
         setPostState(false);
       })
       .catch((error) => console.log(error));
-  }, [postState, authState]);
+  }, [postState, setPostState]);
 
   return (
     <div className="list-of-posts">
-      {posts.map((post, key) => (
+      {posts.map((post) => (
         <Post
-          key={key}
+          key={post.id}
           title={post.title}
           imageUrl={post.imageUrl}
           firstname={post.User.firstname}
