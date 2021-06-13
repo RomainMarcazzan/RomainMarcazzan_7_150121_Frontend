@@ -22,7 +22,6 @@ const ProfilePage = () => {
         },
       })
       .then((response) => {
-        console.log(response.data);
         setAuthState({ ...authState, user: response.data });
       })
       .catch((error) => {

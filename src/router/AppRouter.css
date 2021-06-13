@@ -9,6 +9,10 @@
   height: 3rem;
 }
 
+.navbar_hamburger {
+  display: none !important;
+}
+
 .navbar__registration {
   display: flex;
   align-items: center;
@@ -46,4 +50,39 @@
 .navbar__registration__info__lastname {
   color: black;
   font-weight: bold;
+}
+
+.navbar__registration--toggled {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .navbar {
+    flex-wrap: wrap;
+  }
+  .navbar_hamburger {
+    display: flex !important;
+  }
+  .navbar__registration {
+    display: none;
+    width: 100%;
+  }
+
+  .navbar__registration--toggled {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .navbar__registration--toggled a {
+    text-decoration: none;
+    margin: 0.5rem auto;
+    color: black;
+    font-weight: bold;
+  }
+
+  .navbar__registration--toggled a:hover {
+    color: #fd2d01;
+  }
 }

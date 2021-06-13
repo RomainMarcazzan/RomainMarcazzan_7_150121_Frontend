@@ -40,10 +40,13 @@
 
 .post-page__title {
   margin: 0 0 0.5rem 0.5rem;
+  width: 25rem;
 }
 
 .post-page__image {
   height: 25rem;
+  /* width: 40rem; */
+  object-fit: cover;
 }
 
 .post-page__action {
@@ -90,4 +93,10 @@
 
 .post-page__form__send:hover {
   color: #fd2d01;
+}
+
+@media screen and (max-width: 426px) {
+  .post-page__container {
+    width: 90%;
+  }
 }

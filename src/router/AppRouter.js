@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./AppRouter.css";
 import logo from "../images/logo.png";
 import { AuthContext } from "../context/AuthContext";
@@ -10,26 +10,44 @@ import PostPage from "../pages/PostPage";
 import { Avatar } from "@material-ui/core";
 import ProfilePage from "../pages/ProfilePage";
 import AdminPage from "../pages/AdminPage";
+import MenuIcon from "@material-ui/icons/Menu";
 
 const AppRouter = () => {
   const [authState, setAuthState] = useContext(AuthContext);
-
+  const [isToggled, setIstoggled] = useState(false);
   const logout = () => {
     setAuthState({ isLoggedin: false });
+  };
+
+  const menuHandler = () => {
+    setIstoggled(!isToggled);
   };
 
   return (
     <BrowserRouter>
       <div className="navbar">
         <img className="navbar__logo" src={logo} alt="logo groupomania" />
+        <MenuIcon onClick={menuHandler} className="navbar_hamburger" />
         {!authState.isLoggedIn && (
-          <div className="navbar__registration">
+          <div
+            className={
+              isToggled
+                ? "navbar__registration--toggled"
+                : "navbar__registration"
+            }
+          >
             <Link to="/login">Se connecter</Link>
             <Link to="/Signup">S'inscrire</Link>
           </div>
         )}
         {authState.isLoggedIn ? (
-          <div className="navbar__registration">
+          <div
+            className={
+              isToggled
+                ? "navbar__registration--toggled"
+                : "navbar__registration"
+            }
+          >
             <Link to="/">Acceuil</Link>
             {authState.user.isAdmin ? <Link to="/admin">Admin</Link> : ""}
             <Link to="/" onClick={logout}>

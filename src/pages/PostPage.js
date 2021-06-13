@@ -90,7 +90,6 @@ const PostPage = () => {
       .then((response) => {
         setComments(response.data.comments);
         setCommentState(false);
-        console.log(response.data.comments);
       })
       .catch((error) => {
         console.log(error);
@@ -109,7 +108,6 @@ const PostPage = () => {
   };
 
   const submitCommentHandler = (data, { resetForm }) => {
-    console.log(data);
     axios
       .post("http://localhost:5000/api/comments/", data, {
         headers: {
