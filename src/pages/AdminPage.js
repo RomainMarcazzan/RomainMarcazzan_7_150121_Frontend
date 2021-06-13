@@ -43,6 +43,23 @@ const AdminPage = () => {
       .catch((error) => console.log(error));
   };
 
+  const removeReportPostHandler = (reportPostId) => {
+    axios
+      .delete(`http://localhost:5000/api/posts/${reportPostId}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then(() =>
+        setReportData(
+          reportData.filter((report) => {
+            return report.Post.id !== reportPostId;
+          })
+        )
+      )
+      .catch((error) => console.log(error));
+  };
+
   const removeProfileHandler = (profileId) => {
     axios
       .delete(`http://localhost:5000/api/reports/users/${profileId}`, {
@@ -71,6 +88,7 @@ const AdminPage = () => {
             <th>Nom auteur du signalement</th>
             <th>Date création du signalement</th>
             <th>Suppression du signalement</th>
+            <th>Suppression du Post</th>
           </tr>
           {reportData.map((report) => (
             <tr key={report.id}>
@@ -85,6 +103,12 @@ const AdminPage = () => {
                 <DeleteForever
                   className="admin__table__remove"
                   onClick={() => removeReportHandler(report.id)}
+                />
+              </td>
+              <td>
+                <DeleteForever
+                  className="admin__table__remove"
+                  onClick={() => removeReportPostHandler(report.Post.id)}
                 />
               </td>
             </tr>
