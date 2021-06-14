@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./AdminPage.css";
 import axios from "axios";
-import { DeleteForever } from "@material-ui/icons";
+import { Block, DeleteForever } from "@material-ui/icons";
 const AdminPage = () => {
   const [reportData, setReportData] = useState([]);
   const [profileData, setProfileData] = useState([]);
@@ -77,6 +77,33 @@ const AdminPage = () => {
       .catch((error) => console.log(error));
   };
 
+  const blockProfileHandler = (profileId) => {
+    const profile = profileData.find((profile) => profile.id === profileId);
+    const profileActive = profile.isActive;
+    console.log(profileActive);
+    axios
+      .put(
+        `http://localhost:5000/api/reports/users/${profileId}`,
+        { ...profileData, isActive: !profileActive },
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
+      .then(() =>
+        setProfileData(
+          profileData.map((profile) => {
+            return profile.id === profileId
+              ? { ...profile, isActive: !profile.isActive }
+              : profile;
+          })
+        )
+      )
+
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div className="admin">
       <table className="admin__reports">
@@ -120,6 +147,7 @@ const AdminPage = () => {
           <tr>
             <th>Profil</th>
             <th>Suppression du Profil</th>
+            <th>Bloquer le Profil</th>
           </tr>
           {profileData.map((profile) => (
             <tr key={profile.id}>
@@ -130,6 +158,16 @@ const AdminPage = () => {
                 <DeleteForever
                   className="admin__table__remove"
                   onClick={() => removeProfileHandler(profile.id)}
+                />
+              </td>
+              <td>
+                <Block
+                  className={
+                    profile.isActive
+                      ? "admin__table__isActive"
+                      : "admin__table__notActive"
+                  }
+                  onClick={() => blockProfileHandler(profile.id)}
                 />
               </td>
             </tr>

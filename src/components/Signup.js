@@ -18,6 +18,7 @@ const Signup = () => {
     firstname: "",
     lastname: "",
     isAdmin: false,
+    isActive: true,
   };
 
   const validationSchema = Yup.object().shape({

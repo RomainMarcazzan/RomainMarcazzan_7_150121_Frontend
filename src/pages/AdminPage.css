@@ -26,3 +26,11 @@ td {
 .admin__users {
   margin-top: 3rem;
 }
+
+.admin__table__isActive {
+  color: green;
+}
+
+.admin__table__notActive {
+  color: red;
+}
