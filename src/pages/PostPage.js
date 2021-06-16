@@ -24,7 +24,7 @@ const PostPage = () => {
   const [isReported, setIsReported] = useState(null);
 
   const initialValues = {
-    userId: authState.user.id,
+    userId: authState.user.userId,
     comment: "",
     postId: id,
   };
@@ -53,7 +53,7 @@ const PostPage = () => {
       })
       .then((response) => {
         response.data.map((like) =>
-          like.userId === authState.user.id
+          like.userId === authState.user.userId
             ? setIsLiked(true)
             : setIsLiked(false)
         );
@@ -70,7 +70,7 @@ const PostPage = () => {
       })
       .then((response) => {
         response.data.map((report) =>
-          report.userId === authState.user.id
+          report.userId === authState.user.userId
             ? setIsReported(true)
             : setIsReported(false)
         );
@@ -78,7 +78,7 @@ const PostPage = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [authState.user.id, id]);
+  }, [authState.user.userId, id]);
 
   useEffect(() => {
     axios
@@ -125,7 +125,7 @@ const PostPage = () => {
 
   const LikeHandler = () => {
     const dataLike = {
-      userId: authState.user.id,
+      userId: authState.user.userId,
       postId: id,
     };
 
@@ -145,7 +145,7 @@ const PostPage = () => {
 
   const reportHandler = () => {
     const dataPost = {
-      userId: authState.user.id,
+      userId: authState.user.userId,
       postId: id,
     };
     axios
@@ -184,7 +184,7 @@ const PostPage = () => {
             alt="post"
           />
           <div className="post-page__action">
-            {authState.user.id === postData.userId ? (
+            {authState.user.userId === postData.userId ? (
               <Button onClick={deletePostHandler}>
                 <DeleteForever /> <span>Supprimer</span>
               </Button>
@@ -225,7 +225,7 @@ const PostPage = () => {
                 comment={value.comment}
                 firstname={value.User.firstname}
                 lastname={value.User.lastname}
-                userId={value.User.id}
+                userId={value.userId}
                 avatar={value.User.avatar}
                 updatedAt={value.updatedAt}
               />

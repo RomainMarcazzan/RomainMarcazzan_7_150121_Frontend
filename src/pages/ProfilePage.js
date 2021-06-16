@@ -22,12 +22,15 @@ const ProfilePage = () => {
         },
       })
       .then((response) => {
-        setAuthState({ ...authState, user: response.data });
+        setAuthState({
+          ...authState,
+          user: { ...authState.user, userAvatar: response.data.user.avatar },
+        });
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [profileState, id, setAuthState]);
+  }, [id, profileState]);
 
   const changeAvatarHandler = () => {
     const data = new FormData();
@@ -40,7 +43,7 @@ const ProfilePage = () => {
         },
       })
       .then(() => {
-        setProfileState(true);
+        setProfileState(!profileState);
       })
       .catch((error) => {
         console.log(error);
@@ -68,10 +71,10 @@ const ProfilePage = () => {
       {authState.user ? (
         <div className="profile-container">
           <span className="profile-container__title">Modifier avatar</span>
-          {authState.user.avatar ? (
+          {authState.user.userAvatar ? (
             <Avatar
               className="profile-container__avatar"
-              src={authState.user.avatar}
+              src={authState.user.userAvatar}
             />
           ) : (
             <Avatar className="profile-container__avatar" />

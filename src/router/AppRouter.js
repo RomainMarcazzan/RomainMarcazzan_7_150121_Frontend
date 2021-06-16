@@ -25,6 +25,7 @@ const AppRouter = () => {
 
   return (
     <BrowserRouter>
+      {console.log(authState)}
       <div className="navbar">
         <img className="navbar__logo" src={logo} alt="logo groupomania" />
         <MenuIcon onClick={menuHandler} className="navbar_hamburger" />
@@ -49,23 +50,23 @@ const AppRouter = () => {
             }
           >
             <Link to="/">Acceuil</Link>
-            {authState.user.isAdmin ? <Link to="/admin">Admin</Link> : ""}
+            {authState.user.userIsAdmin ? <Link to="/admin">Admin</Link> : ""}
             <Link to="/" onClick={logout}>
               Se déconnecter
             </Link>
             <Link
               className="navbar__registration__info"
-              to={`/profile/${authState.user.id}`}
+              to={`/profile/${authState.user.userId}`}
             >
               <Avatar
                 className="navbar__registration__info__avatar"
-                src={authState.user.avatar}
+                src={authState.user.userAvatar}
               />
               <div className="navbar__registration__info__firstname">
-                {authState.user.firstname}
+                {authState.user.userFirstname}
               </div>
               <div className="navbar__registration__info__lastname">
-                {authState.user.lastname}
+                {authState.user.userLastname}
               </div>
             </Link>
           </div>

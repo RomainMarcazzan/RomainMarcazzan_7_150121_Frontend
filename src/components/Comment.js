@@ -79,7 +79,7 @@ const Comment = (props) => {
         ""
       )}
 
-      {authState.user.id === props.userId && !modify ? (
+      {authState.user.userId === props.userId && !modify ? (
         <div className="comment-container__actions">
           <Button
             onClick={() => {

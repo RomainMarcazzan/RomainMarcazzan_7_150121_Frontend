@@ -19,7 +19,7 @@ const CreatePost = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     const data = new FormData();
-    data.append("userId", authState.user.id);
+    data.append("userId", authState.user.userId);
     data.append("title", title);
     data.append("imageUrl", file);
 
