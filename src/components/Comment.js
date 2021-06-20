@@ -10,7 +10,7 @@ import { Send } from "@material-ui/icons";
 
 const Comment = (props) => {
   const [authState] = useContext(AuthContext);
-  const [, setCommentState] = useContext(CommentContext);
+  const [commentState, setCommentState] = useContext(CommentContext);
   const [modify, setModify] = useState(false);
   const initialValues = {
     comment: props.comment,
@@ -27,7 +27,13 @@ const Comment = (props) => {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       })
-      .then(() => setCommentState(true))
+      .then(() =>
+        setCommentState(
+          commentState.filter((comment) => {
+            return comment.id !== props.commentId;
+          })
+        )
+      )
       .catch((error) => console.log(error));
   };
 
@@ -38,9 +44,15 @@ const Comment = (props) => {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       })
-      .then(() => {
-        setCommentState(true);
+      .then((response) => {
+        const newCommentState = commentState.map((commentToCheck) =>
+          commentToCheck.id === response.data.id
+            ? response.data
+            : commentToCheck
+        );
+        setCommentState(newCommentState);
         setModify(false);
+
         resetForm({});
       })
       .catch((error) => console.log(error));
@@ -59,9 +71,6 @@ const Comment = (props) => {
       {!modify ? (
         <div className="comment-container__comment">{props.comment}</div>
       ) : (
-        ""
-      )}
-      {modify ? (
         <Formik
           initialValues={initialValues}
           onSubmit={modifyCommentHandler}
@@ -75,11 +84,9 @@ const Comment = (props) => {
             </Button>
           </Form>
         </Formik>
-      ) : (
-        ""
       )}
 
-      {authState.user.userId === props.userId && !modify ? (
+      {authState.user.id === props.userId && !modify ? (
         <div className="comment-container__actions">
           <Button
             onClick={() => {

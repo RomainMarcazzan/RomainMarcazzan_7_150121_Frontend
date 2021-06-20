@@ -24,7 +24,7 @@ const ProfilePage = () => {
       .then((response) => {
         setAuthState({
           ...authState,
-          user: { ...authState.user, userAvatar: response.data.user.avatar },
+          user: { ...authState.user, avatar: response.data.user.avatar },
         });
       })
       .catch((error) => {
@@ -71,10 +71,10 @@ const ProfilePage = () => {
       {authState.user ? (
         <div className="profile-container">
           <span className="profile-container__title">Modifier avatar</span>
-          {authState.user.userAvatar ? (
+          {authState.user.avatar ? (
             <Avatar
               className="profile-container__avatar"
-              src={authState.user.userAvatar}
+              src={authState.user.avatar}
             />
           ) : (
             <Avatar className="profile-container__avatar" />

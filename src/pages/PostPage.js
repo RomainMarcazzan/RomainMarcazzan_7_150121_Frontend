@@ -18,13 +18,13 @@ const PostPage = () => {
 
   const [authState] = useContext(AuthContext);
   const [commentState, setCommentState] = useContext(CommentContext);
-  const [comments, setComments] = useState([]);
+  // const [comments, setComments] = useState([]);
 
   const [isLiked, setIsLiked] = useState(null);
   const [isReported, setIsReported] = useState(null);
 
   const initialValues = {
-    userId: authState.user.userId,
+    userId: authState.user.id,
     comment: "",
     postId: id,
   };
@@ -53,7 +53,7 @@ const PostPage = () => {
       })
       .then((response) => {
         response.data.map((like) =>
-          like.userId === authState.user.userId
+          like.userId === authState.user.id
             ? setIsLiked(true)
             : setIsLiked(false)
         );
@@ -70,7 +70,7 @@ const PostPage = () => {
       })
       .then((response) => {
         response.data.map((report) =>
-          report.userId === authState.user.userId
+          report.userId === authState.user.id
             ? setIsReported(true)
             : setIsReported(false)
         );
@@ -78,7 +78,7 @@ const PostPage = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [authState.user.userId, id]);
+  }, [authState.user.id, id]);
 
   useEffect(() => {
     axios
@@ -88,13 +88,12 @@ const PostPage = () => {
         },
       })
       .then((response) => {
-        setComments(response.data.comments);
-        setCommentState(false);
+        setCommentState(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [commentState, setCommentState, id]);
+  }, []);
 
   const deletePostHandler = () => {
     axios
@@ -107,15 +106,18 @@ const PostPage = () => {
       .catch((error) => console.log(error));
   };
 
-  const submitCommentHandler = (data, { resetForm }) => {
+  const submitCommentHandler = (dataComment, { resetForm }) => {
     axios
-      .post("http://localhost:5000/api/comments/", data, {
+      .post("http://localhost:5000/api/comments/", dataComment, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       })
-      .then(() => {
-        setCommentState(true);
+      .then((response) => {
+        setCommentState([
+          ...commentState,
+          { ...response.data, User: authState.user },
+        ]);
         resetForm({});
       })
       .catch((error) => {
@@ -125,7 +127,7 @@ const PostPage = () => {
 
   const LikeHandler = () => {
     const dataLike = {
-      userId: authState.user.userId,
+      userId: authState.user.id,
       postId: id,
     };
 
@@ -145,7 +147,7 @@ const PostPage = () => {
 
   const reportHandler = () => {
     const dataPost = {
-      userId: authState.user.userId,
+      userId: authState.user.id,
       postId: id,
     };
     axios
@@ -184,7 +186,7 @@ const PostPage = () => {
             alt="post"
           />
           <div className="post-page__action">
-            {authState.user.userId === postData.userId ? (
+            {authState.user.id === postData.userId ? (
               <Button onClick={deletePostHandler}>
                 <DeleteForever /> <span>Supprimer</span>
               </Button>
@@ -218,7 +220,7 @@ const PostPage = () => {
             </Form>
           </Formik>
           <div className="comment">
-            {comments.map((value, key) => (
+            {commentState?.map((value, key) => (
               <Comment
                 key={key}
                 commentId={value.id}

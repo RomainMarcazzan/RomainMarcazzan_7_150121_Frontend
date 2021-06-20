@@ -50,23 +50,23 @@ const AppRouter = () => {
             }
           >
             <Link to="/">Acceuil</Link>
-            {authState.user.userIsAdmin ? <Link to="/admin">Admin</Link> : ""}
+            {authState.user.isAdmin ? <Link to="/admin">Admin</Link> : ""}
             <Link to="/" onClick={logout}>
               Se déconnecter
             </Link>
             <Link
               className="navbar__registration__info"
-              to={`/profile/${authState.user.userId}`}
+              to={`/profile/${authState.user.id}`}
             >
               <Avatar
                 className="navbar__registration__info__avatar"
-                src={authState.user.userAvatar}
+                src={authState.user.avatar}
               />
               <div className="navbar__registration__info__firstname">
-                {authState.user.userFirstname}
+                {authState.user.firstname}
               </div>
               <div className="navbar__registration__info__lastname">
-                {authState.user.userLastname}
+                {authState.user.lastname}
               </div>
             </Link>
           </div>
