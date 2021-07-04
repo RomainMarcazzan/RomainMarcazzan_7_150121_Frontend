@@ -13,7 +13,6 @@ const CreatePost = () => {
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState("");
   const [postState, setPostState] = useContext(PostContext);
-  const [errorMessage, setErrorMessage] = useState("");
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const onSubmit = (e) => {
@@ -41,9 +40,8 @@ const CreatePost = () => {
         setTitle("");
         e.target.reset();
       })
-      .catch((error) => {
+      .catch(() => {
         setIsOpenModal(true);
-        setErrorMessage(error.response.statusText);
       });
   };
   return (
@@ -61,7 +59,7 @@ const CreatePost = () => {
         }}
       >
         <div className="error-container">
-          <p> Un post doit contenir au minimum un titre et/ou une image</p>
+          <p>Un post doit contenir au minimum un titre et/ou une image</p>
           <button onClick={() => setIsOpenModal(false)}>Ok</button>
         </div>
       </ReactModal>

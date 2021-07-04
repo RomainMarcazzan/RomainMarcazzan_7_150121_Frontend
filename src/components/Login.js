@@ -61,11 +61,12 @@ const Login = () => {
             transform: "translate(-50%, -50%)",
             borderRadius: "2rem",
             textAlign: "center",
+            height: "6rem",
           },
         }}
       >
         <div className="error-container">
-          <p> {errorMessage}</p>
+          <p>{errorMessage}</p>
           <button onClick={() => setIsOpenModal(false)}>Ok</button>
         </div>
       </ReactModal>

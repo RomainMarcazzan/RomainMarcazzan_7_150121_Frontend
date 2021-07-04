@@ -70,7 +70,6 @@ input[type="file"] {
   align-items: center;
   justify-content: center;
   color: #fd2d01;
-  margin: 5rem auto;
 }
 
 .error-container button {

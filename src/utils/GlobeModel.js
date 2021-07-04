@@ -18,13 +18,13 @@ export default function Model(props) {
       <mesh
         geometry={nodes.Sphère.geometry}
         material={materials.Matériau}
-        scale={[2.02, 2.02, 2.02]}
+        scale={[1.32, 1.32, 1.32]}
       />
       <mesh
         geometry={nodes.Sphère001.geometry}
         material={materials["Matériau.001"]}
         position={[-0.01, 0.02, 0]}
-        scale={[2.03, 2.03, 2.03]}
+        scale={[1.33, 1.33, 1.33]}
       />
     </group>
   );
