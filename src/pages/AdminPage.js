@@ -106,7 +106,6 @@ const AdminPage = () => {
 
   return (
     <div className="admin">
-      {console.log(reportData)}
       <table className="admin__reports">
         <tbody>
           <tr>

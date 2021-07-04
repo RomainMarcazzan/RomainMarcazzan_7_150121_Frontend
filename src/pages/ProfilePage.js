@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import "./ProfilePage.css";
 import { useHistory, useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
@@ -9,28 +9,9 @@ import { DeleteForever, Image, Send } from "@material-ui/icons";
 const ProfilePage = () => {
   const [authState, setAuthState] = useContext(AuthContext);
   const [avatarFile, setAvatarFile] = useState(null);
-  const [profileState, setProfileState] = useState(false);
 
   const { id } = useParams();
   const history = useHistory();
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/profile/${id}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
-      .then((response) => {
-        setAuthState({
-          ...authState,
-          user: { ...authState.user, avatar: response.data.user.avatar },
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [id, profileState]);
 
   const changeAvatarHandler = () => {
     const data = new FormData();
@@ -42,8 +23,8 @@ const ProfilePage = () => {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       })
-      .then(() => {
-        setProfileState(!profileState);
+      .then((response) => {
+        setAuthState({ ...authState, user: response.data });
       })
       .catch((error) => {
         console.log(error);

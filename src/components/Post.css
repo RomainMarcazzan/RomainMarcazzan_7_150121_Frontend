@@ -1,5 +1,5 @@
 .post {
-  cursor: pointer;
+  /* cursor: pointer; */
   border-radius: 2.5rem;
   padding: 1rem;
   margin-bottom: 2rem;
@@ -7,9 +7,9 @@
   box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #ffffff;
 }
 
-.post:hover {
+/* .post:hover {
   transform: scale(1.02);
-}
+} */
 
 .post__info-container {
   display: flex;
@@ -18,15 +18,21 @@
   font-weight: bold;
 }
 
-.post__info-container__avatar {
+.post__avatar {
   margin-right: 1rem;
   border-radius: 50%;
   box-shadow: 0px 0px 2px #5f5f5f, 0px 0px 0px 5px #ecf0f3, 8px 8px 15px #a7aaaf,
     -8px -8px 15px #ffffff;
 }
 
-.post__info-container__firstname {
+.post__firstname {
   margin-right: 0.5rem;
+}
+
+.post__date {
+  font-size: 0.7rem;
+  margin: 0 0 0.5rem 0.5rem;
+  color: grey;
 }
 
 .post__title {
@@ -41,10 +47,42 @@
   border-radius: 1rem;
 }
 
-.comment {
+.post__counts {
   display: flex;
-  flex-direction: column;
-  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 0.8rem;
+  border-bottom: 1px solid gray;
+  border-top: 1px solid gray;
+  padding: 5px;
+  color: gray;
+  margin: 0.5rem auto;
+}
+
+.post__action-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.post__form {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.7rem;
+}
+
+.post__form input {
+  width: 90%;
+  border: none;
+  outline: none;
+  background: none;
+  padding-left: 1rem;
+  border-radius: 2.5rem;
+  box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff;
+}
+
+.post__form__send:hover {
+  color: #fd2d01;
 }
 
 @media screen and (max-width: 426px) {

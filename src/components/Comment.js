@@ -60,16 +60,20 @@ const Comment = (props) => {
 
   return (
     <div className="comment-container">
-      <div className="comment-container__info">
-        <Avatar src={props.avatar} />
-        <div className="firstname">{props.firstname}</div>
-        <div className="lastname">{props.lastname}</div>
+      <div className="comment__info">
+        {props.avatar ? (
+          <Avatar className="comment__info__avatar" src={props.avatar} />
+        ) : (
+          <Avatar className="comment__info__avatar" />
+        )}
+        <div className="comment__info__firstname">{props.firstname}</div>
+        <div className="comment__info__lastname">{props.lastname}</div>
       </div>
-      <div className="comment-container__date">
+      <div className="comment__date">
         {new Date(props.updatedAt).toLocaleDateString("fr-FR")}
       </div>
       {!modify ? (
-        <div className="comment-container__comment">{props.comment}</div>
+        <div className="comment__comment">{props.comment}</div>
       ) : (
         <Formik
           initialValues={initialValues}
@@ -78,7 +82,7 @@ const Comment = (props) => {
         >
           <Form>
             {/* <ErrorMessage name="comment" component="span" /> */}
-            <Field className="comment-container__form-modify" name="comment" />
+            <Field className="comment__form-modify" name="comment" />
             <Button type="submit">
               <Send />
             </Button>
@@ -87,7 +91,7 @@ const Comment = (props) => {
       )}
 
       {authState.user.id === props.userId && !modify ? (
-        <div className="comment-container__actions">
+        <div className="comment__actions">
           <Button
             onClick={() => {
               setModify(true);

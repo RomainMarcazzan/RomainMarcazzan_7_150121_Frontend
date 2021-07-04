@@ -12,7 +12,7 @@ const CreatePost = () => {
 
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState("");
-  const [, setPostState] = useContext(PostContext);
+  const [postState, setPostState] = useContext(PostContext);
   const [errorMessage, setErrorMessage] = useState("");
   const [isOpenModal, setIsOpenModal] = useState(false);
 
@@ -29,9 +29,16 @@ const CreatePost = () => {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       })
-      .then(() => {
+      .then((response) => {
+        const newPostState = [...postState];
+        newPostState.splice(0, 0, {
+          ...response.data,
+          userId: parseInt(response.data.userId),
+          User: { ...authState.user },
+        });
+        setPostState(newPostState);
+
         setTitle("");
-        setPostState(true);
         e.target.reset();
       })
       .catch((error) => {

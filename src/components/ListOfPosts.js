@@ -1,15 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./ListOfPosts.css";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 import { PostContext } from "../context/PostContext";
+import { CommentContext } from "../context/CommentContext";
 import Post from "./Post";
 
 const ListOfPosts = () => {
   const [postState, setPostState] = useContext(PostContext);
-  const [posts, setPosts] = useState([]);
-
-  const history = useHistory();
+  const [commentState, setCommentState] = useContext(CommentContext);
 
   useEffect(() => {
     axios
@@ -19,23 +17,37 @@ const ListOfPosts = () => {
         },
       })
       .then((response) => {
-        setPosts(response.data.posts);
-        setPostState(false);
+        setPostState(response.data);
       })
       .catch((error) => console.log(error));
-  }, [postState, setPostState]);
+    axios
+      .get("http://localhost:5000/api/comments", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        setCommentState(response.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <div className="list-of-posts">
-      {posts.map((post) => (
+      {postState.map((post) => (
         <Post
           key={post.id}
+          postId={post.id}
           title={post.title}
           imageUrl={post.imageUrl}
           firstname={post.User.firstname}
           lastname={post.User.lastname}
-          onClick={() => history.push(`/post/${post.id}`)}
+          comments={commentState.filter(
+            (comments) => comments.postId === post.id
+          )}
           avatar={post.User.avatar}
+          createdAt={post.createdAt}
+          userId={post.userId}
         />
       ))}
     </div>
