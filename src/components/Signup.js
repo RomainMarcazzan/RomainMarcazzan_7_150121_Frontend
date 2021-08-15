@@ -30,7 +30,10 @@ const Signup = () => {
 
   const onSubmit = (data) => {
     axios
-      .post("http://localhost:5000/api/auth/signup", data)
+      .post(
+        "https://groupomania-server-backend.herokuapp.com/api/auth/signup",
+        data
+      )
       .then((response) => {
         localStorage.setItem("token", response.data.token);
         if (response.data.error) {

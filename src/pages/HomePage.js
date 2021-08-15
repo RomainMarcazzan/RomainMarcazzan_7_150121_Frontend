@@ -5,7 +5,6 @@ import "./HomePage.css";
 import CreatePost from "../components/CreatePost";
 import ListOfPosts from "../components/ListOfPosts";
 import { AuthContext } from "../context/AuthContext";
-import { Center } from "@react-three/drei";
 
 const HomePage = () => {
   const [authState] = useContext(AuthContext);

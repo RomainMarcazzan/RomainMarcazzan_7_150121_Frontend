@@ -8,7 +8,7 @@ const AdminPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/reports", {
+      .get("https://groupomania-server-backend.herokuapp.com/api/reports", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -17,22 +17,28 @@ const AdminPage = () => {
       .catch((error) => console.log(error));
 
     axios
-      .get("http://localhost:5000/api/reports/users", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get(
+        "https://groupomania-server-backend.herokuapp.com/api/reports/users",
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then((response) => setProfileData(response.data))
       .catch((error) => console.log(error));
   }, []);
 
   const removeReportHandler = (reportId) => {
     axios
-      .delete(`http://localhost:5000/api/reports/${reportId}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .delete(
+        `https://groupomania-server-backend.herokuapp.com/api/reports/${reportId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then(() =>
         setReportData(
           reportData.filter((report) => {
@@ -45,11 +51,14 @@ const AdminPage = () => {
 
   const removeReportPostHandler = (reportPostId) => {
     axios
-      .delete(`http://localhost:5000/api/posts/${reportPostId}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .delete(
+        `https://groupomania-server-backend.herokuapp.com/api/posts/${reportPostId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then(() =>
         setReportData(
           reportData.filter((report) => {
@@ -62,11 +71,14 @@ const AdminPage = () => {
 
   const removeProfileHandler = (profileId) => {
     axios
-      .delete(`http://localhost:5000/api/reports/users/${profileId}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .delete(
+        `https://groupomania-server-backend.herokuapp.com/api/reports/users/${profileId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then(() =>
         setProfileData(
           profileData.filter((profile) => {
@@ -83,7 +95,7 @@ const AdminPage = () => {
     console.log(profileActive);
     axios
       .put(
-        `http://localhost:5000/api/reports/users/${profileId}`,
+        `https://groupomania-server-backend.herokuapp.com/api/reports/users/${profileId}`,
         { ...profileData, isActive: !profileActive },
         {
           headers: {

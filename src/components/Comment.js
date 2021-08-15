@@ -22,11 +22,14 @@ const Comment = (props) => {
 
   const deleteCommentHandler = () => {
     axios
-      .delete(`http://localhost:5000/api/comments/${props.commentId}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .delete(
+        `https://groupomania-server-backend.herokuapp.com/api/comments/${props.commentId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then(() =>
         setCommentState(
           commentState.filter((comment) => {
@@ -39,11 +42,15 @@ const Comment = (props) => {
 
   const modifyCommentHandler = (data, { resetForm }) => {
     axios
-      .put(`http://localhost:5000/api/comments/${props.commentId}`, data, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .put(
+        `https://groupomania-server-backend.herokuapp.com/api/comments/${props.commentId}`,
+        data,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then((response) => {
         const newCommentState = commentState.map((commentToCheck) =>
           commentToCheck.id === response.data.id

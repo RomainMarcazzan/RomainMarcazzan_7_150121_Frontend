@@ -18,11 +18,15 @@ const ProfilePage = () => {
     data.append("avatar", avatarFile);
 
     axios
-      .put(`http://localhost:5000/api/profile/${id}`, data, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .put(
+        `https://groupomania-server-backend.herokuapp.com/api/profile/${id}`,
+        data,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then((response) => {
         setAuthState({ ...authState, user: response.data });
       })
@@ -33,11 +37,14 @@ const ProfilePage = () => {
 
   const deleteProfileHandler = () => {
     axios
-      .delete(`http://localhost:5000/api/profile/${id}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .delete(
+        `https://groupomania-server-backend.herokuapp.com/api/profile/${id}`,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then(() => {
         setAuthState({ isLoggedIn: false, user: null });
         history.push("/");

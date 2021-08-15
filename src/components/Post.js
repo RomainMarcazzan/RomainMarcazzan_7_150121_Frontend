@@ -20,11 +20,14 @@ const Post = (props) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/reports/${props.postId}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get(
+        `https://groupomania-server-backend.herokuapp.com/api/reports/${props.postId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then((response) => {
         response.data.map((report) =>
           report.userId === authState.user.id
@@ -39,11 +42,14 @@ const Post = (props) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/likes/${props.postId}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get(
+        `https://groupomania-server-backend.herokuapp.com/api/likes/${props.postId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then((response) => {
         response.data.map((like) =>
           like.userId === authState.user.id
@@ -59,11 +65,14 @@ const Post = (props) => {
 
   const removePostHandler = () => {
     axios
-      .delete(`http://localhost:5000/api/posts/${props.postId}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .delete(
+        `https://groupomania-server-backend.herokuapp.com/api/posts/${props.postId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then(
         setPostState(
           postState.filter((post) => {
@@ -80,11 +89,15 @@ const Post = (props) => {
     };
 
     axios
-      .post(`http://localhost:5000/api/likes/`, dataLike, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .post(
+        `https://groupomania-server-backend.herokuapp.com/api/likes/`,
+        dataLike,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then((response) => {
         setIsLiked(response.data.isLiked);
       })
@@ -98,11 +111,15 @@ const Post = (props) => {
       postId: props.postId,
     };
     axios
-      .post(`http://localhost:5000/api/reports/`, dataPost, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .post(
+        `https://groupomania-server-backend.herokuapp.com/api/reports/`,
+        dataPost,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then((response) => {
         setIsReported(response.data.isReported);
       })
@@ -123,11 +140,15 @@ const Post = (props) => {
 
   const submitCommentHandler = (dataComment, { resetForm }) => {
     axios
-      .post("http://localhost:5000/api/comments/", dataComment, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .post(
+        "https://groupomania-server-backend.herokuapp.com/api/comments/",
+        dataComment,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then((response) => {
         setCommentState([
           { ...response.data, User: authState.user },

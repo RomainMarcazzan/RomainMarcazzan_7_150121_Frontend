@@ -23,11 +23,15 @@ const CreatePost = () => {
     data.append("imageUrl", file);
 
     axios
-      .post("http://localhost:5000/api/posts/", data, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .post(
+        "https://groupomania-server-backend.herokuapp.com/api/posts/",
+        data,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then((response) => {
         const newPostState = [...postState];
         newPostState.splice(0, 0, {
