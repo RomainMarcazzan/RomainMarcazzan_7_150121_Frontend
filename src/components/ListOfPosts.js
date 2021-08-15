@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import "./ListOfPosts.css";
 import axios from "axios";
 import { PostContext } from "../context/PostContext";
