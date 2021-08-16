@@ -11,7 +11,7 @@ const ListOfPosts = () => {
 
   useEffect(() => {
     axios
-      .get("https://groupomania-server-backend.herokuapp.com/api/posts", {
+      .get("https://groupomania-backend-v2.herokuapp.com/api/posts", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -21,7 +21,7 @@ const ListOfPosts = () => {
       })
       .catch((error) => console.log(error));
     axios
-      .get("https://groupomania-server-backend.herokuapp.com/api/comments", {
+      .get("https://groupomania-backend-v2.herokuapp.com/api/comments", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },

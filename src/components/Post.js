@@ -66,7 +66,7 @@ const Post = (props) => {
   const removePostHandler = () => {
     axios
       .delete(
-        `https://groupomania-server-backend.herokuapp.com/api/posts/${props.postId}`,
+        `https://groupomania-backend-v2.herokuapp.com/api/posts/${props.postId}`,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -90,7 +90,7 @@ const Post = (props) => {
 
     axios
       .post(
-        `https://groupomania-server-backend.herokuapp.com/api/likes/`,
+        `https://groupomania-backend-v2.herokuapp.com/api/likes/`,
         dataLike,
         {
           headers: {
@@ -112,7 +112,7 @@ const Post = (props) => {
     };
     axios
       .post(
-        `https://groupomania-server-backend.herokuapp.com/api/reports/`,
+        `https://groupomania-backend-v2.herokuapp.com/api/reports/`,
         dataPost,
         {
           headers: {
@@ -141,7 +141,7 @@ const Post = (props) => {
   const submitCommentHandler = (dataComment, { resetForm }) => {
     axios
       .post(
-        "https://groupomania-server-backend.herokuapp.com/api/comments/",
+        "https://groupomania-backend-v2.herokuapp.com/api/comments/",
         dataComment,
         {
           headers: {

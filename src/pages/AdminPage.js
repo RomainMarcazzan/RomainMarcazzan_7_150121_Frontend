@@ -32,7 +32,7 @@ const AdminPage = () => {
   const removeReportHandler = (reportId) => {
     axios
       .delete(
-        `https://groupomania-server-backend.herokuapp.com/api/reports/${reportId}`,
+        `https://groupomania-backend-v2.herokuapp.com/api/reports/${reportId}`,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -52,7 +52,7 @@ const AdminPage = () => {
   const removeReportPostHandler = (reportPostId) => {
     axios
       .delete(
-        `https://groupomania-server-backend.herokuapp.com/api/posts/${reportPostId}`,
+        `https://groupomania-backend-v2.herokuapp.com/api/posts/${reportPostId}`,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -72,7 +72,7 @@ const AdminPage = () => {
   const removeProfileHandler = (profileId) => {
     axios
       .delete(
-        `https://groupomania-server-backend.herokuapp.com/api/reports/users/${profileId}`,
+        `https://groupomania-backend-v2.herokuapp.com/api/reports/users/${profileId}`,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -95,7 +95,7 @@ const AdminPage = () => {
     console.log(profileActive);
     axios
       .put(
-        `https://groupomania-server-backend.herokuapp.com/api/reports/users/${profileId}`,
+        `https://groupomania-backend-v2.herokuapp.com/api/reports/users/${profileId}`,
         { ...profileData, isActive: !profileActive },
         {
           headers: {

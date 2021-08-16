@@ -29,10 +29,7 @@ const Login = () => {
 
   const onSubmit = (data) => {
     axios
-      .post(
-        "https://groupomania-server-backend.herokuapp.com/api/auth/login",
-        data
-      )
+      .post("https://groupomania-backend-v2.herokuapp.com/api/auth/login", data)
       .then((response) => {
         if (response.data.error) {
           setAuthState({ isLoggedIn: false });

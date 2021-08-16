@@ -19,7 +19,7 @@ const ProfilePage = () => {
 
     axios
       .put(
-        `https://groupomania-server-backend.herokuapp.com/api/profile/${id}`,
+        `https://groupomania-backend-v2.herokuapp.com/api/profile/${id}`,
         data,
         {
           headers: {
@@ -38,7 +38,7 @@ const ProfilePage = () => {
   const deleteProfileHandler = () => {
     axios
       .delete(
-        `https://groupomania-server-backend.herokuapp.com/api/profile/${id}`,
+        `https://groupomania-backend-v2.herokuapp.com/api/profile/${id}`,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),

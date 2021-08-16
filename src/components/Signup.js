@@ -31,7 +31,7 @@ const Signup = () => {
   const onSubmit = (data) => {
     axios
       .post(
-        "https://groupomania-server-backend.herokuapp.com/api/auth/signup",
+        "https://groupomania-backend-v2.herokuapp.com/api/auth/signup",
         data
       )
       .then((response) => {

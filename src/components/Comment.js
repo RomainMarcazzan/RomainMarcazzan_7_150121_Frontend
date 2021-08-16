@@ -23,7 +23,7 @@ const Comment = (props) => {
   const deleteCommentHandler = () => {
     axios
       .delete(
-        `https://groupomania-server-backend.herokuapp.com/api/comments/${props.commentId}`,
+        `https://groupomania-backend-v2.herokuapp.com/api/comments/${props.commentId}`,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -43,7 +43,7 @@ const Comment = (props) => {
   const modifyCommentHandler = (data, { resetForm }) => {
     axios
       .put(
-        `https://groupomania-server-backend.herokuapp.com/api/comments/${props.commentId}`,
+        `https://groupomania-backend-v2.herokuapp.com/api/comments/${props.commentId}`,
         data,
         {
           headers: {
