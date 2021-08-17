@@ -21,7 +21,7 @@ const Post = (props) => {
   useEffect(() => {
     axios
       .get(
-        `https://groupomania-server-backend.herokuapp.com/api/reports/${props.postId}`,
+        `https://groupomania-backend-v2.herokuapp.com/api/reports/${props.postId}`,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -43,7 +43,7 @@ const Post = (props) => {
   useEffect(() => {
     axios
       .get(
-        `https://groupomania-server-backend.herokuapp.com/api/likes/${props.postId}`,
+        `https://groupomania-backend-v2.herokuapp.com/api/likes/${props.postId}`,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
