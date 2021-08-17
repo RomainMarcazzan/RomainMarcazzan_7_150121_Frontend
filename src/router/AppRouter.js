@@ -47,7 +47,7 @@ const AppRouter = () => {
                 : "navbar__registration"
             }
           >
-            <Link to="/">Acceuil</Link>
+            <Link to="/">Accueil</Link>
             {authState.user.isAdmin && <Link to="/admin">Admin</Link>}
             <Link to="/" onClick={logout}>
               Se déconnecter

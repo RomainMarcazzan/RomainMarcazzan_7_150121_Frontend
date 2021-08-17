@@ -10,7 +10,7 @@ import ReactModal from "react-modal";
 const CreatePost = () => {
   const [authState] = useContext(AuthContext);
 
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState("");
   const [title, setTitle] = useState("");
   const [postState, setPostState] = useContext(PostContext);
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -20,7 +20,7 @@ const CreatePost = () => {
     const data = new FormData();
     data.append("userId", authState.user.id);
     data.append("title", title);
-    data.append("imageUrl", file);
+    file && data.append("imageUrl", file);
 
     axios
       .post("https://groupomania-backend-v2.herokuapp.com/api/posts/", data, {
@@ -38,6 +38,7 @@ const CreatePost = () => {
         setPostState(newPostState);
 
         setTitle("");
+        setFile(null);
         e.target.reset();
       })
       .catch(() => {
@@ -59,7 +60,7 @@ const CreatePost = () => {
         }}
       >
         <div className="error-container">
-          <p>Un post doit contenir au minimum un titre et/ou une image</p>
+          <p>Un post doit contenir une photo ou un gif</p>
           <button onClick={() => setIsOpenModal(false)}>Ok</button>
         </div>
       </ReactModal>
@@ -91,7 +92,7 @@ const CreatePost = () => {
             setFile(file);
           }}
         />
-        <Button className="create-post__button" type="submit">
+        <Button d className="create-post__button" type="submit">
           Publier
         </Button>
       </div>
