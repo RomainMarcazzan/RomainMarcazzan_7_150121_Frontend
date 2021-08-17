@@ -8,7 +8,7 @@ const AdminPage = () => {
 
   useEffect(() => {
     axios
-      .get("https://groupomania-server-backend.herokuapp.com/api/reports", {
+      .get("https://groupomania-backend-v2.herokuapp.com/api/reports", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -17,14 +17,11 @@ const AdminPage = () => {
       .catch((error) => console.log(error));
 
     axios
-      .get(
-        "https://groupomania-server-backend.herokuapp.com/api/reports/users",
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      )
+      .get("https://groupomania-backend-v2.herokuapp.com/api/reports/users", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
       .then((response) => setProfileData(response.data))
       .catch((error) => console.log(error));
   }, []);
